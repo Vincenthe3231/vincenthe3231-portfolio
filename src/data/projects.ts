@@ -4,9 +4,9 @@ export interface Project {
   tagline: string;
   domain: string;
   role: string;
-  accentVar: string;          // CSS var name for project accent
-  accentClass: string;        // Tailwind class for accent text
-  glowFrom: string;           // tailwind gradient class
+  accentVar: string; // CSS var name for project accent
+  accentClass: string; // Tailwind class for accent text
+  glowFrom: string; // tailwind gradient class
   glowTo: string;
   techStack: string[];
   featureCallout: string;
