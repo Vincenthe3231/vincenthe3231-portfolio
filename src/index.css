@@ -1,105 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ======================================================
+   Vincenthe — Internship Portfolio Design System
+   All colors HSL. Tokens only — no ad-hoc colors.
+   ====================================================== */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Surfaces */
+    --background: 226 30% 5%;          /* #080B14 ~ near-black */
+    --foreground: 42 18% 92%;          /* #F0EEE9 off-white */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --surface: 226 28% 7%;
+    --surface-elevated: 226 26% 10%;
+    --surface-glass: 226 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --card: 226 28% 7%;
+    --card-foreground: 42 18% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --popover: 226 28% 7%;
+    --popover-foreground: 42 18% 92%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primary: 42 18% 92%;
+    --primary-foreground: 226 30% 5%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --secondary: 226 22% 14%;
+    --secondary-foreground: 42 18% 92%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 226 18% 14%;
+    --muted-foreground: 42 8% 65%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 187 100% 50%;            /* Electric cyan #00E5FF */
+    --accent-foreground: 226 30% 5%;
+    --accent-glow: 187 100% 60%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 42 18% 92%;
 
-    --radius: 0.5rem;
+    --border: 226 22% 16%;
+    --input: 226 22% 16%;
+    --ring: 187 100% 50%;
 
-    --sidebar-background: 0 0% 98%;
+    --radius: 0.875rem;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Project accent palette */
+    --p-owner: 35 90% 60%;             /* warm amber */
+    --p-reno: 18 95% 58%;              /* bold orange */
+    --p-belive: 178 70% 42%;           /* deep teal */
+    --p-wits: 235 70% 70%;             /* soft indigo */
+    --p-human: 187 100% 55%;           /* electric cyan */
+    --p-vision: 280 85% 65%;           /* violet */
+    --p-vision-2: 42 95% 60%;          /* gold */
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Effects */
+    --gradient-hero: radial-gradient(ellipse at top, hsl(187 100% 50% / 0.08), transparent 60%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-vision: linear-gradient(135deg, hsl(var(--p-vision)), hsl(var(--p-vision-2)));
+    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.25);
+    --shadow-elevated: 0 30px 60px -20px hsl(226 60% 2% / 0.6);
+    --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --transition-smooth: 300ms cubic-bezier(0.16, 1, 0.30, 1);
+    --transition-drawer: 400ms cubic-bezier(0.16, 1, 0.30, 1);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar (unused but keep for shadcn compat) */
+    --sidebar-background: 226 28% 7%;
+    --sidebar-foreground: 42 18% 92%;
+    --sidebar-primary: 187 100% 50%;
+    --sidebar-primary-foreground: 226 30% 5%;
+    --sidebar-accent: 226 22% 14%;
+    --sidebar-accent-foreground: 42 18% 92%;
+    --sidebar-border: 226 22% 16%;
+    --sidebar-ring: 187 100% 50%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  .dark { /* same — site is always dark */ }
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  * { @apply border-border; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "ss01", "cv11";
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
   }
+
+  /* Decorative grain overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--noise);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.35);
+    color: hsl(var(--foreground));
+  }
+
+  /* Hide native cursor on devices that hover */
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+    a, button, [role="button"] { cursor: none; }
+  }
+}
+
+@layer components {
+  .glass {
+    background: hsl(var(--surface-glass) / 0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid hsl(var(--foreground) / 0.06);
+  }
+
+  .text-display {
+    @apply font-display tracking-tight;
+    letter-spacing: 0.01em;
+  }
+
+  .section-pad {
+    @apply px-6 md:px-12 lg:px-20 py-24 md:py-36;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.12), transparent);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+
+  .text-balance { text-wrap: balance; }
 }
