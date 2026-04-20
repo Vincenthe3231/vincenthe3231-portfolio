@@ -1,3 +1,6 @@
+import type { LucideIcon } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
+
 export const Footer = () => {
   return (
     <footer id="contact" className="relative section-pad pt-24 pb-12 overflow-hidden">
@@ -25,19 +28,22 @@ export const Footer = () => {
 
         <div className="mt-12 grid gap-3 md:grid-cols-3">
           <FooterLink
+            icon={Github}
             label="GitHub"
             value="@Vincenthe3231"
             href="https://github.com/Vincenthe3231"
           />
           <FooterLink
+            icon={Mail}
             label="Email"
-            value="hello@vincenthe.dev"
-            href="mailto:hello@vincenthe.dev"
+            value="vincenthe3231@gmail.com"
+            href="mailto:vincenthe3231@gmail.com"
           />
           <FooterLink
+            icon={Linkedin}
             label="LinkedIn"
-            value="linkedin.com/in/vincenthe"
-            href="https://linkedin.com/in/vincenthe"
+            value="https://www.linkedin.com/in/law-wen-sen-7a001233b"
+            href="https://www.linkedin.com/in/law-wen-sen-7a001233b"
           />
         </div>
 
@@ -56,21 +62,38 @@ export const Footer = () => {
   );
 };
 
-const FooterLink = ({ label, value, href }: { label: string; value: string; href: string }) => (
+type FooterLinkProps = {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  href: string;
+};
+
+const FooterLink = ({ icon: Icon, label, value, href }: FooterLinkProps) => (
   <a
     href={href}
     target={href.startsWith("http") ? "_blank" : undefined}
     rel="noopener noreferrer"
     className="group glass rounded-2xl p-6 hover:border-accent/40 transition-colors"
   >
-    <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40 mb-3">
-      {label}
-    </div>
-    <div className="flex items-center justify-between gap-4">
-      <span className="text-lg text-foreground/90 group-hover:text-accent transition-colors truncate">
-        {value}
+    <div className="flex gap-4">
+      <span
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-foreground/10 bg-surface/50 text-accent transition-colors group-hover:border-accent/35 group-hover:bg-accent/10"
+        aria-hidden
+      >
+        <Icon className="h-5 w-5" strokeWidth={1.5} />
       </span>
-      <span className="text-foreground/40 group-hover:text-accent transition-colors">↗</span>
+      <div className="min-w-0 flex-1">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/40 mb-2">
+          {label}
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-lg text-foreground/90 group-hover:text-accent transition-colors truncate">
+            {value}
+          </span>
+          <span className="shrink-0 text-foreground/40 group-hover:text-accent transition-colors">↗</span>
+        </div>
+      </div>
     </div>
   </a>
 );

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
-const keywords = ["TypeScript", "React", "Node.js", "TensorFlow.js", "Django", "Supabase"];
+const keywords = ["TypeScript", "React", "TensorFlow.js", "Django", "Supabase"];
 
 export const Hero = () => {
   return (
