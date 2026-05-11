@@ -116,9 +116,9 @@ export const ProjectCard = ({ project, index, onOpen }: Props) => {
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="font-mono text-[11px] uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors"
-            aria-label={`${project.title} GitHub repository`}
+            aria-label={project.id === "belive-client" ? `${project.title} live demo` : `${project.title} GitHub repository`}
           >
-            GitHub ↗
+            {project.id === "belive-client" ? "Live Demo ↗" : "GitHub ↗"}
           </a>
         </div>
       </div>

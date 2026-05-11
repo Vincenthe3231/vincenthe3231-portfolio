@@ -129,9 +129,9 @@ export const projects: Project[] = [
         "CSRF protection on every state-changing request, no exceptions for 'internal' routes.",
       ],
       learned:
-        "Auth is a UX feature first. If it's invisible to the user and paranoid under the hood, you've done it right.",
+        "Auth is a UX feature first. If it's invisible to the user and paranoid under the hood",
     },
-    githubUrl: "https://github.com/Belive-FO/Belive-FO-Client/tree/feature/attendance",
+    githubUrl: "https://flow-office.vercel.app",
   },
   {
     id: "belive-backend",

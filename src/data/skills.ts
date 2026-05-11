@@ -31,6 +31,7 @@ export const skills: SkillNode[] = [
   { name: "Vercel", group: "Cloud", size: 16, projects: ["human-api", "belive-client"] },
   { name: "Supabase", group: "Cloud", size: 18, projects: ["human-api", "belive-client", "belive-backend", "vision-forge"] },
   { name: "Firebase", group: "Cloud", size: 12, projects: ["witsnote"] },
+  { name: "Laravel Cloud", group: "Cloud", size: 14, projects: ["belive-backend"] },
   {
     name: "Lark SDK",
     group: "Cloud",
