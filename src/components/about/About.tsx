@@ -1,22 +1,54 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "../shared/SectionHeader";
 
-const principles = [
+const decisions = [
   {
-    title: "Owned end-to-end",
-    body: "Schema, API, UI, deploy — one engineer, one feature slice. The bug count drops when nobody can pass the buck.",
+    tag: "ownerui",
+    accentVar: "--p-owner",
+    decision: "Extracted 6 hooks and 8 sub-components from a monolithic component",
+    metric: "1,679 → 171 lines",
   },
   {
-    title: "Architecture first",
-    body: "Clean client/server splits. Monorepos with discipline. RBAC modelled before a single route is wired.",
+    tag: "renoxpert",
+    accentVar: "--p-reno",
+    decision: "Shared @repo/ui across two apps inside a single Turborepo",
+    metric: "2 apps, 1 system",
   },
   {
-    title: "AI with intent",
-    body: "Face recognition for verification. Summarization for productivity. If it's not solving a real workflow, it doesn't ship.",
+    tag: "renoxpert",
+    accentVar: "--p-reno",
+    decision: "Laravel Sail containerises PHP, MySQL and Redis in one compose file",
+    metric: "sail up",
   },
   {
-    title: "Iteration as standard",
-    body: "finalv2 isn't a typo — it's a promise. v1 ships features, v2 ships the system that makes the next ten cheap.",
+    tag: "belive-client",
+    accentVar: "--p-belive",
+    decision: "Next.js BFF proxies every API call so the browser never sees a backend URL and its internal endpoints",
+    metric: "httpOnly only",
+  },
+  {
+    tag: "belive-backend",
+    accentVar: "--p-belive",
+    decision: "4 Laravel modules with zero cross-module model imports enforced",
+    metric: "clean boundary + avoid vendor lock-in if we split later",
+  },
+  {
+    tag: "witsnote",
+    accentVar: "--p-wits",
+    decision: "Gemini 2.5 Flash replaces Tesseract for OCR with no binary dependency",
+    metric: "cloud OCR",
+  },
+  {
+    tag: "human-api",
+    accentVar: "--p-human",
+    decision: "CPU backend forced on TensorFlow.js to eliminate WASM cold-start errors",
+    metric: "0 ENOENT",
+  },
+  {
+    tag: "vision-forge",
+    accentVar: "--p-vision",
+    decision: "Pixi.js handles visible-area grid culling while React Flow owns the logical layer",
+    metric: "re-renders cut",
   },
 ];
 
@@ -26,26 +58,48 @@ export const About = () => {
       <SectionHeader
         eyebrow="01 / About"
         title="I think in systems, not screens."
-        description="Six projects across real estate, renovation, HR ops, academic productivity, biometrics and AI tooling — each owned across the stack, each shipped to production."
+        description="Eight projects across renovation, field operations, academic productivity, biometrics and AI tooling — each owned across the stack, each shipped to production."
       />
 
-      <div className="mt-20 grid gap-6 md:grid-cols-2">
-        {principles.map((p, i) => (
+      <div className="mt-20">
+        {decisions.map((d, i) => (
           <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="glass rounded-2xl p-8 hover:border-accent/30 transition-colors duration-300"
+            key={i}
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-5 border-t border-foreground/[0.08] pl-4 hover:bg-foreground/[0.025] hover:pl-6 transition-all duration-200 rounded-r-lg"
           >
-            <div className="flex items-baseline gap-3 mb-4">
-              <span className="font-mono text-xs text-accent">0{i + 1}</span>
-              <h3 className="text-display text-3xl">{p.title}</h3>
-            </div>
-            <p className="text-foreground/70 leading-relaxed">{p.body}</p>
+            {/* Hover accent bar */}
+            <div
+              aria-hidden
+              className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              style={{ background: `hsl(var(${d.accentVar}))` }}
+            />
+
+            {/* Project tag */}
+            <span
+              className="font-mono text-[10px] uppercase tracking-[0.2em] shrink-0 md:min-w-[120px]"
+              style={{ color: `hsl(var(${d.accentVar}))` }}
+            >
+              {d.tag}
+            </span>
+
+            {/* Decision text */}
+            <p className="text-foreground/70 text-sm leading-relaxed flex-1">
+              {d.decision}
+            </p>
+
+            {/* Metric */}
+            <span className="font-mono text-[11px] text-foreground/30 shrink-0 md:text-right">
+              {d.metric}
+            </span>
           </motion.div>
         ))}
+
+        {/* Bottom border to close the last row */}
+        <div className="border-t border-foreground/[0.08]" />
       </div>
 
       {/* Code snippet */}

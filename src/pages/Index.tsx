@@ -2,7 +2,7 @@ import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/about/About";
 import { Projects } from "@/components/projects/Projects";
 import { Skills } from "@/components/skills/Skills";
-import { Values } from "@/components/values/Values";
+import { Lessons } from "@/components/lessons/Lessons";
 import { Timeline } from "@/components/timeline/Timeline";
 import { Footer } from "@/components/footer/Footer";
 import { CustomCursor } from "@/components/shared/CustomCursor";
@@ -19,7 +19,7 @@ const Index = () => {
       <div className="hairline" />
       <Skills />
       <div className="hairline" />
-      <Values />
+      <Lessons />
       <div className="hairline" />
       <Timeline />
       <Footer />

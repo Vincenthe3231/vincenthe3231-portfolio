@@ -304,12 +304,6 @@ Based on the repositories in your profile, here are the XYZ formula documentatio
 - **Accomplish**: Enable full-text search across note content
 - **Measured by**: Users find notes by keyword; search returns results in <100ms
 - **By doing**: Implementing Elasticsearch or database full-text search
-
-**Output 8 - Deployment & Scalability**
-- **Accomplish**: Deploy on production server with database migrations and static files
-- **Measured by**: Application accessible 24/7; database backed up; logs captured
-- **By doing**: Configuring gunicorn, nginx, PostgreSQL; using Docker for consistency
-
 ---
 
 ### **8. vision-forge** (HTML, 67.8%)
@@ -321,8 +315,8 @@ Based on the repositories in your profile, here are the XYZ formula documentatio
 
 **Output 2 - Real-Time Visualization**
 - **Accomplish**: Display processing results with interactive charts and media previews
-- **Measured by**: Charts update without page reload; images/videos render correctly
-- **By doing**: Using Canvas API, WebGL, or D3.js for visualization
+- **Measured by**: Charts update without page reload; images render correctly
+- **By doing**: Using ReactFlow, WebGL, or D3.js for visualization
 
 **Output 3 - File Upload & Processing**
 - **Accomplish**: Handle image/video uploads with streaming to backend processors
@@ -343,15 +337,4 @@ Based on the repositories in your profile, here are the XYZ formula documentatio
 - **Accomplish**: Minimize load times for media-heavy application
 - **Measured by**: Lighthouse score >90; LCP <2.5s; lazy loading implemented
 - **By doing**: Image compression; code splitting; service workers for caching
-
-**Output 7 - Backend Integration**
-- **Accomplish**: Communicate with Python/TypeScript backend for vision processing
-- **Measured by**: API calls complete successfully; responses handled with error handling
-- **By doing**: Using fetch/Axios; implementing retry logic and timeouts
-
-**Output 8 - Testing & Browser Compatibility**
-- **Accomplish**: Ensure consistent experience across modern browsers
-- **Measured by**: Tests pass on Chrome, Firefox, Safari; no console errors
-- **By doing**: Using Jest for unit tests; testing on BrowserStack
-
 ---

@@ -66,6 +66,15 @@ export const ProjectCard = ({ project, index, onOpen }: Props) => {
           style={{ background: `hsl(var(${project.accentVar}) / 0.5)` }}
         />
 
+        {/* Live badge */}
+        {project.liveUrl && (
+          <span
+            className="absolute top-4 right-4 font-mono text-[10px] uppercase tracking-[0.2em] bg-accent/15 text-accent border border-accent/30 rounded-full px-2.5 py-0.5"
+          >
+            Live
+          </span>
+        )}
+
         {/* Header */}
         <div className="relative flex items-start justify-between gap-4">
           <div>

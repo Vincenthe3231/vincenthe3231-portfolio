@@ -1,0 +1,86 @@
+Vincenthe3231/human-api
+Bullet 1: Accomplished reliable serverless face recognition on Vercel, as measured by a configurable similarity confidence threshold of 0.8 and support for multiple reference photos per user, by building a TypeScript API with @vladmandic/human + TensorFlow.js that computes L2-norm face embeddings against Supabase-stored photo URLs.
+Source: api/v1/recognize.ts, lib/human.ts, vercel.json (memory: 2048 MB, maxDuration: 60s)
+
+Bullet 2: Accomplished production-stable Node.js face detection deployment, as measured by calling production human-api URL in RESTful communication and result acquired without unexpected errors, by patching @vladmandic/human package.json exports and forcing CPU backend to eliminate WASM ENOENT errors in serverless cold-start environment.
+Source: patches/@vladmandic__human@3.3.6.patch, commit "fix(human): set backend to CPU to avoid WASM ENOENT error in Node"
+
+Bullet 3: Accomplished structured API error surface, as measured by 5 distinct HTTP error codes (400/404/502/500) with requestId + timestamp on all responses, by designing a validation + error-handling layer in lib/validate.ts and lib/debug.ts.
+Source: api/v1/recognize.ts, lib/validate.ts
+
+Bullet 4: Accomplished scalable multi-reference matching, as measured by improving the accuracy and precision of face recogniton with frontal and side faces, by refactoring from single descriptor to descriptor array, computing one embedding per stored photo and matching against all.
+Source: commit "refactor: update face recognition logic to handle multiple photo URLs"
+
+Vincenthe3231/WitsNote
+Bullet 1: Accomplished AI-powered note summarization for FYP web platform, as measured by using a preset prompt asking Gemini to summarize accordingly based on different templates, by integrating T5-base model via Hugging Face Transformers with beam search (num_beams=4, length_penalty=2.0) and chunk-based processing for long documents.
+Source: AI_Summarization/ module, requirements.txt (transformers 4.52.4, torch 2.7.0)
+
+Bullet 2: Accomplished multi-format blog publishing subsystem bridging Flutter + web, as measured by 4 distinct post types (Standard, Case Study, Listicle, Infographic) each with dedicated template handlers, by building Django REST Framework serializers supporting nested images and listicle subheadings in a single POST.
+Source: WitsNote/models.py, WitsNote/template/handlers/, WitsNote/serializers.py
+
+Bullet 3: Accomplished AI-assisted OCR extraction in-browser, as measured by extracting textual info of an uploaded image, by integrating Gemini 2.5 Flash API via inline base64 image in run_ocr view, eliminating need for local Tesseract for image-to-text.
+Source: WitsNote/views.py (run_ocr fn, gemini-2.5-flash-preview-05-20:generateContent)
+
+Vincenthe3231/RenoXpert-Client + RenoXpert-Backend
+Bullet 1: Accomplished full-stack renovation staff portal with role-based access control, as measured by 3 distinct role tiers (top_management, hr_admin, HOD) with differentiated data scoping, by building React 19 + TanStack Router client with Laravel 12 backend using CheckTopManagement middleware and controller-level authorization.
+Source: apps/staff-portal/src/app/(DashboardLayout)/, Laravel DepartmentController, commit "refactor(user-management): update roles — super_admin → top_management"
+
+Bullet 2: Accomplished auditable department management with full activity trail, as measured by logged create/update/delete events including IP address and before/after attributes, by implementing spatie/laravel-activitylog in DepartmentController and surfacing logs in frontend AuditTable with infinite pagination.
+Source: DepartmentController.php, commit "feat: implement activity logging for department creation, updates, deletions"; AuditTable component
+
+Bullet 3: Accomplished monorepo multi-app architecture shipping client + staff portals from single codebase, as measured by shared package.json and isolated package.json across different directories, by configuring Turborepo with shared @repo/ui component library, Docker multi-stage builds, and Vercel deployment with SSL CA config.
+Source: turbo.json, apps/client-app/, apps/staff-portal/, vercel.json
+
+Bullet 4: Accomplished department short-code system with auto-generation and uniqueness enforcement, as measured by min/max length validation rules in StoreDepartmentRequest, by implementing name-derived short code generation on the frontend and required validation on backend model request.
+Source: commit "feat(staff-portal): add short code functionality", StoreDepartmentRequest.php
+
+Bullet 5: Accomplished data and records consistency across dashboard and audit trail, as measured by invalidating stale queries cached by ReactQuery to always show up-to-date data, by integrating RecentActivityCard pulling from activity log API and rendering department create/update/delete events with parsed fallback for deleted-department log entries.
+Source: RecentActivityCard component, AuditTable component
+
+Belive-FO/Belive-FO-Client + Belive-FO-Backend
+Bullet 1: Accomplished enterprise SSO-authenticated HR PWA for BeLive, as measured by full Lark (Feishu) OAuth flow with Sanctum token stored in httpOnly cookie, by building Next.js BFF proxy pattern where browser never calls Laravel directly — all API calls proxied through Next.js Route Handlers.
+Source: src/features/lark-sdk/, src/app/api/auth/lark/callback/, commit "feat: implement Lark OAuth integration"
+
+Bullet 2: Accomplished GPS-geofenced attendance system with photo verification, as measured by clock in/out within office radius 200m and achieved face recognition and verification via human-api, by implementing useToast-driven geolocation error handling, office radius compliance validation before clock-out, and getLocationAsync with LocationHeatmap + PhotoVerificationFeed components.
+Source: src/features/attendance/, commit "feat: enhance attendance functionality with improved geolocation handling"
+
+Bullet 3: Accomplished multi-level expense claim workflow with approval chain resolution, as measured by dynamic approval chain supporting multiple claim types (mileage, receipt) with subclaim type validation, by building 28-component claims feature including ClaimApprovalChainResolver service, ApprovalTimeline UI, and DistanceService for mileage computation.
+Source: src/features/claims/ (28 components), app/Modules/Claims/Services/, commit "feat: enhance claims approval process and UI"
+
+Bullet 4: Accomplished modular backend architecture separating domain concerns, as measured by 4 distinct Laravel modules (Attendance, Claims, Leave, Shared) each with own service provider and api.php routes, by implementing module-based monolith pattern under app/Modules/ with Supabase JWT + RLS replacing Laravel Sanctum/Spatie Permission.
+Source: app/Modules/, backend composer.json (saeedvir/supabase, NOT laravel/sanctum)
+
+Bullet 5: Accomplished secure claim attachment handling with S3 storage, as measured by using S3 Access Key and Allowed MIME Types, by building ClaimAttachmentService with dedicated S3 filesystem disk, inline image display for image attachments, and link fallback for non-image files.
+Source: ClaimAttachmentService.php, commit "feat(claims): add attachment handling — ClaimAttachmentService, S3 filesystem disk"
+
+Bullet 6: Accomplished safe DB seeding pipeline for Supabase, as measured by transaction-wrapped SQL with blocked DELETE/TRUNCATE/DROP statements, by implementing custom php artisan supabase:seed Artisan command executing ordered SQL files from database/seeds/sql/.
+Source: app/Console/Commands/SupabaseSeedCommand.php (inferred from description)
+
+Vincenhe3231/ownerUI (finalv2 branch)
+Bullet 1: Accomplished ~90% reduction in component file size for renovation progress detail view, as measured by line count drop from 1,679 to 171 lines, by extracting 6 custom hooks (useItemStatus, useSwipeGestures, useTabsSlidingHint, useCoachMark, useFilterSwipe, useAppBarHeight) and 8 sub-components into dedicated modules.
+Source: commit "refactor: Restructure RenovationProgressDetail — ~90% line count reduction from 1,679 to 171 lines"
+
+Bullet 2: Accomplished 70% reduction in quotation overview component size, as measured by line count drop from 1,485 to ~450 lines, by modularizing into extracted constants, hooks, utils, and components.
+Source: commit "refactor: modularize QuotationOverview — reduced from 1485 to ~450 lines"
+
+Bullet 3: Accomplished database-driven renovation progress tracking with locale-aware timestamps, as measured by reno_progress table with 8 columns including foreign key to users and last_updated_at, by migrating from hardcoded data to seeded DB model with Malaysian locale (en_MY, Asia/Kuala_Lumpur) Carbon datetime formatting.
+Source: commit "feat(renovation-progress): migrate hardcoded progress data to DB — reno_progress table, seeder, locale-aware timestamps"
+
+Bullet 4: Accomplished gesture-driven mobile navigation UX, as measured by circular/looping tab + filter navigation and swipe gestures across 3 page types, by implementing useTabSwipe, useFilterSwipe, useSwipeGestures hooks with slide-in/out animations, sticky filter chips via calc(var(--app-bar-height)+3rem), and auto-hiding BottomNavigation on scroll.
+Source: resources/js/Pages/QuotationOverview/, resources/js/Pages/RenovationProgressDetail/, commit "refactor: unify navigation gestures, standardize animations"
+
+belive-ventures/vision-forge
+Bullet 1: Accomplished node-based virtual production pipeline canvas with 17+ node types, as measured by 50+ canvas component files and 8 Supabase migrations supporting persisted node/edge/viewport/drawing state, by building React Flow + Pixi.js hybrid rendering architecture with Zustand workflow store and optimistic-locking cloud save (SpaceSaveConflictError on version mismatch).
+Source: src/components/canvas/ (50+ files), supabase/migrations/, commit "feat: implement enhanced cloud save functionality with sync status"
+
+Bullet 2: Accomplished canvas rendering performance optimization, as measured by automating puppeteer to log down and generate the performance report under "/artifacts", by implementing zoom-level quantization on CustomEdge, hybrid grid + edge culling in PixiHybridBackground limiting render to visible area, lazy loading for CustomEdge/GroupNode, and image mount suppression during low-zoom + gesture interactions.
+Source: src/components/canvas/PixiHybridBackground.tsx, src/components/canvas/CustomEdge.tsx, commit "refactor: enhance canvas performance — zoom quantization, hybrid grid culling, viewport persistence, lazy loading"
+
+Bullet 3: Accomplished AI-powered image generation pipeline via OpenRouter, as measured by calling LLMs to convert the user prompt and images into textual instructions and generate different versions of images over subsequent nodes, by building scout-execute Supabase Edge Function and nodes (ImageGeneratorNode, VideoGeneratorNode, ImageVariationsNode, ImageUpscalerNode) with lenient JSON parsing and typed HTTP error formatting for 503 responses.
+Source: supabase/functions/scout-execute/, commit "refactor: enhance OpenRouter error handling — parseJsonLenient, formatOpenRouterImageHttpError for 503 responses"
+
+Bullet 4: Accomplished freehand drawing on infinite canvas, as measured by strokes persisted to spaces.canvas_drawings column (migration 20260414), by implementing CanvasDrawInteraction + CanvasFlowDrawingsSvg + CanvasStrokeRenderContext with pencil/eraser tools and draw toolbar.
+Source: supabase/migrations/20260414120000_spaces_canvas_drawings.sql, commit "feat: implement freehand drawing functionality"
+
+Bullet 5: Accomplished anonymous-to-authenticated auth upgrade path, as measured by allowing testers to test the application freely and an authenticated route for testing the workflow and image generation, by implementing Supabase signInAnonymously() for instant access with optional updateUser email/password attachment to same session, backed by RLS policies restricting spaces/profiles to owner.
+Source: Supabase auth implementation, supabase/migrations/20260318120000_init_vision_forge.sql (RLS policies)

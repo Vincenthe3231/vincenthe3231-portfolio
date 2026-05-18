@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
-const keywords = ["TypeScript", "React", "TensorFlow.js", "Django", "Supabase"];
+const keywords = ["TypeScript", "Laravel", "Next.js", "Django", "Supabase"];
 
 export const Hero = () => {
   return (
@@ -64,9 +64,9 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-2xl text-xl md:text-2xl text-foreground/80 text-balance"
         >
-          Full-stack engineer.{" "}
-          <span className="text-accent">AI integrator.</span>{" "}
-          <span className="text-foreground/60">Production thinker.</span>
+          End-to-end full-stack ownership.{" "}
+          <span className="text-accent">TypeScript-first.</span>{" "}
+          <span className="text-foreground/60">Production mindset.</span>
         </motion.p>
 
         <motion.div

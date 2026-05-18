@@ -31,17 +31,17 @@ export const projects: Project[] = [
     accentClass: "text-project-owner",
     glowFrom: "from-project-owner/30",
     glowTo: "to-transparent",
-    techStack: ["Laravel", "Inertia.js", "TypeScript", "PWA", "Shared Domain Models"],
+    techStack: ["Laravel", "Inertia.js", "React", "Tailwind", "PWA"],
     featureCallout:
-      "Architected full-stack ownership interfaces by combining Laravel backend services with TypeScript frontends — bridging server-side business logic and client-side UX into a cohesive PWA architecture that handles complex permission flows through shared domain models.",
+      "Architected full-stack ownership interfaces with Laravel + Inertia.js + React, refactoring a 1,679-line component to 171 lines (~90% reduction) by extracting 6 custom hooks and 8 sub-components, and migrating hardcoded progress data to a DB-driven model with Malaysian locale timestamps.",
     story: {
       problem:
         "Property owners needed a single, installable surface that behaved like an app but stayed in lockstep with server-authoritative business logic — without re-implementing permissions on both sides of the wire.",
       solution:
-        "Adopted Inertia.js to keep Laravel as the source of truth while shipping a TypeScript SPA experience. One domain model, two consumers — the server renders permissions and the client honours them.",
+        "Adopted Inertia.js to keep Laravel as the source of truth while shipping a React SPA experience. One domain model, two consumers — the server renders permissions and the client honours them.",
       decisions: [
         "Inertia over a separate REST + SPA so the routing and auth model stays in Laravel.",
-        "Shared TypeScript domain types generated from the backend contract — UI cannot drift from server truth.",
+        "Modularised monolithic components into hooks and sub-components — RenovationProgressDetail dropped from 1,679 to 171 lines.",
         "PWA shell so owners install it once and re-open it like a native tool.",
       ],
       learned:
@@ -59,9 +59,9 @@ export const projects: Project[] = [
     accentClass: "text-project-reno",
     glowFrom: "from-project-reno/30",
     glowTo: "to-transparent",
-    techStack: ["Next.js", "Turborepo", "TanStack Query", "Radix", "Tailwind", "pnpm workspaces"],
+    techStack: ["React 19", "Turborepo", "TanStack Router", "TanStack Query", "Radix", "Tailwind"],
     featureCallout:
-      "Mastered monorepo scaling with Turborepo across multiple React applications (client and staff portal). Implemented a shared UI component system via Radix and Tailwind, achieving type-safe routing through TanStack Query while maintaining independent deployment pipelines through pnpm workspaces.",
+      "Scaled a Turborepo monorepo with two apps — React 19 + TanStack Router client app and Next.js staff portal — sharing a @repo/ui component library (Radix + Tailwind). Implemented role-based access (top_management, hr_admin, HOD) with full audit trail via spatie/laravel-activitylog surfaced in an infinite-paginated AuditTable.",
     story: {
       problem:
         "Two distinct apps — a public client and a staff portal — needed a shared design language and shared data fetching primitives without becoming a single deployable blob.",
@@ -75,7 +75,7 @@ export const projects: Project[] = [
       learned:
         "Monorepos pay off when the boundaries are honest. Shared UI yes, shared deploy pipeline no.",
     },
-    githubUrl: "https://github.com/reno-xpert/RenoXpert-Client/tree/feature/staff-roles",
+    githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Client",
   },
   {
     id: "renoxpert-backend",
@@ -101,9 +101,9 @@ export const projects: Project[] = [
         "Migrations + seeders are the canonical setup, scripted into the boot sequence.",
       ],
       learned:
-        "Developer experience is a security feature. When setup is one command, people stop disabling auth locally to 'just test something'.",
+        "Developer experience is vital, combination of Docker and Laravel Sail is way superior to XAMPP for backend services management'.",
     },
-    githubUrl: "https://github.com/reno-xpert/RenoXpert-Backend",
+    githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Backend",
   },
   {
     id: "belive-client",
@@ -129,9 +129,10 @@ export const projects: Project[] = [
         "CSRF protection on every state-changing request, no exceptions for 'internal' routes.",
       ],
       learned:
-        "Auth is a UX feature first. If it's invisible to the user and paranoid under the hood",
+        "Auth is a UX feature first. If it's invisible to the user and paranoid under the hood, it's working.",
     },
     githubUrl: "https://flow-office.vercel.app",
+    liveUrl: "https://flow-office.vercel.app",
   },
   {
     id: "belive-backend",
@@ -143,21 +144,21 @@ export const projects: Project[] = [
     accentClass: "text-project-belive",
     glowFrom: "from-project-belive/30",
     glowTo: "to-transparent",
-    techStack: ["Laravel", "Supabase", "Laravel Telescope", "Spatie Permission", "DDD", "Events"],
+    techStack: ["Laravel", "Supabase", "PostgreSQL", "Modular Monolith", "Laravel Telescope", "Docker"],
     featureCallout:
-      "Designed a modular monolith using domain-driven architecture with Spatie Permission for RBAC. Implemented event-driven communication between attendance, leave, and claims modules while maintaining clean boundaries through contracts and avoiding circular dependencies.",
+      "Designed a 4-module Laravel monolith (Attendance, Claims, Leave, Shared) — each module owns its ServiceProvider and api.php routes with zero cross-module model imports enforced. Supabase Postgres for storage. Safe DB seeding via custom artisan command with transaction-wrapped SQL blocking DELETE/TRUNCATE/DROP.",
     story: {
       problem:
         "Attendance, leave, and claims all touch the same employees but evolve at different speeds. A naive monolith would tangle them; premature microservices would crush the team.",
       solution:
-        "Modular monolith: each domain is its own module with a public contract, communicating via events. Spatie Permission centralises RBAC, Telescope makes the event bus inspectable in dev.",
+        "Modular monolith: each domain is its own module under app/Modules/ with a public contract and dedicated ServiceProvider. Supabase Postgres handles storage; Laravel owns the auth layer.",
       decisions: [
-        "Modules talk through events and contracts only — no direct cross-module model imports.",
-        "Spatie Permission as the single RBAC source rather than per-module ACLs.",
-        "Telescope-instrumented in development to make the event flow visible during code review.",
+        "Modular monolith: each domain under app/Modules/ with a public contract and dedicated ServiceProvider — no cross-module model imports.",
+        "Supabase Postgres for storage — data layer separated from application auth.",
+        "Custom artisan seed command with transaction-wrapped SQL that blocks DELETE/TRUNCATE/DROP — seeding is safe to run repeatedly.",
       ],
       learned:
-        "Boundaries are cheap to draw and expensive to add later. A modular monolith buys you the option to split — without paying for microservices on day one.",
+        "Boundaries are cheap to draw and expensive to add later. A modular monolith buys you the option to split without vendor lock-in issues.",
     },
     githubUrl: "https://github.com/Belive-FO/Belive-FO-Backend",
   },
@@ -171,18 +172,18 @@ export const projects: Project[] = [
     accentClass: "text-project-wits",
     glowFrom: "from-project-wits/30",
     glowTo: "to-transparent",
-    techStack: ["Django", "Jinja2", "Python", "MySQL", "Virtualenv", "Static Pipeline"],
+    techStack: ["Django", "DRF", "Python", "MySQL", "T5-base", "Gemini API"],
     featureCallout:
-      "Built a full-stack note-taking subsystem using Django as the backend API while a Flutter teammate handled the mobile layer. Managed Python virtual environments, MySQL integrations, and static asset pipelines to create a scalable polyglot system architecture.",
+      "Built Django REST Framework subsystem for a Flutter teammate's note app — 4 post types (Standard, Case Study, Listicle, Infographic) with nested serializers for images and subheadings. Integrated T5-base (beam search, num_beams=4) for AI summarization and Gemini 2.5 Flash for image OCR via inline base64, with Firebase Admin SDK for cross-platform auth.",
     story: {
       problem:
         "An FYP team split across Python and Dart needed one source of truth for notes — without either side blocking the other, and without re-deriving the API contract twice.",
       solution:
-        "Django owns the data, the auth and the API; Jinja2 templates serve a web companion; Flutter consumes the same endpoints. Virtualenv + a deterministic static pipeline keep environments reproducible.",
+        "Django REST Framework owns the data, auth, and API; the web layer uses Django templates; Flutter consumes the same endpoints. T5-base handles AI summarization; Gemini 2.5 Flash replaces local Tesseract for OCR.",
       decisions: [
         "Designed the API contract first — both the web templates and the Flutter app build against it.",
-        "MySQL for relational truth; Django ORM for migrations and admin.",
-        "Strict virtualenv discipline so the Python side never poisons the teammate's machine.",
+        "Gemini 2.5 Flash for OCR over local Tesseract — no binary dependency, inline base64 image input.",
+        "Firebase Admin SDK for auth so Flutter users authenticate without a separate credential flow.",
       ],
       learned:
         "Polyglot stacks live or die on the contract between languages. Pin the API, and the rest follows.",
@@ -228,18 +229,18 @@ export const projects: Project[] = [
     accentClass: "text-project-vision",
     glowFrom: "from-project-vision/30",
     glowTo: "to-transparent",
-    techStack: ["Vite", "TypeScript", "React Flow", "Zustand", "Supabase", "RLS", "Vercel Edge", "OpenRouter"],
+    techStack: ["Vite", "TypeScript", "React Flow", "Pixi.js", "Zustand", "Supabase", "RLS", "OpenRouter"],
     featureCallout:
-      "Designed a node-based virtual production pipeline canvas with React Flow and Zustand state management. Integrated Supabase PostgreSQL with RLS policies for multi-tenant workspaces, implemented Vite-powered bundle optimization, and deployed Edge Functions for OpenRouter-backed AI pipeline execution.",
+      "Built a 17-node-type virtual production canvas with React Flow + Pixi.js hybrid rendering — Pixi handles background grid culling (visible area only) and zoom quantization on CustomEdge reduces re-renders. Automated performance logging via Puppeteer scripts generating Lighthouse reports under /artifacts. Supabase Postgres with RLS enforces per-workspace isolation; scout-execute Edge Function runs the OpenRouter AI pipeline with optimistic locking.",
     story: {
       problem:
         "Creators wanted to wire AI steps together visually — but the demo needed to be a real multi-tenant product with isolated workspaces and a credentialed pipeline runtime from day one.",
       solution:
-        "React Flow drives the canvas, Zustand owns the graph state, Supabase Postgres with RLS enforces per-workspace isolation, and Vercel Edge Functions execute pipelines through OpenRouter so any model is one node away.",
+        "React Flow drives the canvas, Pixi.js handles high-performance background rendering with grid culling, Zustand owns the graph state, Supabase Postgres with RLS enforces per-workspace isolation, and scout-execute Edge Function runs pipelines through OpenRouter.",
       decisions: [
         "RLS first, application logic second — isolation is enforced in the database, not in code.",
-        "Edge Functions for execution so latency to OpenRouter stays low globally.",
-        "Vite for fast iteration on a tooling surface that changes weekly.",
+        "Pixi.js hybrid background with visible-area culling — canvas stays fast at scale.",
+        "Puppeteer + Lighthouse scripts for automated performance budgets under /artifacts.",
       ],
       learned:
         "Frontier products live or die on their boring foundation. Multi-tenancy, isolation and a credentialed runtime are what make 'AI canvas' more than a demo.",
