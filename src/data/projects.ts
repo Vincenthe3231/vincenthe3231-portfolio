@@ -45,7 +45,7 @@ export const projects: Project[] = [
         "PWA shell so owners install it once and re-open it like a native tool.",
       ],
       learned:
-        "The cleanest full-stack apps treat the frontend as a view of the backend, not a parallel system. Inertia made that literal.",
+        "The best UI is useless if it doesn't reflect the true state of the world. Server-driven UI with Inertia.js keeps the client honest without sacrificing interactivity or UX.",
     },
     githubUrl: "https://github.com/Vincenthe3231/ownerUI/tree/finalv2",
   },
@@ -73,7 +73,7 @@ export const projects: Project[] = [
         "Independent Next.js deploys per app — shared code, separate release cadences.",
       ],
       learned:
-        "Monorepos pay off when the boundaries are honest. Shared UI yes, shared deploy pipeline no.",
+        "Monorepo is an effective container for related but distinct products, but only if the shared layer is well-factored and the deployment strategy respects the differences.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Client",
   },
@@ -101,7 +101,7 @@ export const projects: Project[] = [
         "Migrations + seeders are the canonical setup, scripted into the boot sequence.",
       ],
       learned:
-        "Developer experience is vital, combination of Docker and Laravel Sail is way superior to XAMPP for backend services management'.",
+        "Developer experience is vital, combination of Docker and Laravel Sail is way superior to XAMPP for backend services management.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Backend",
   },
@@ -129,7 +129,7 @@ export const projects: Project[] = [
         "CSRF protection on every state-changing request, no exceptions for 'internal' routes.",
       ],
       learned:
-        "Auth is a UX feature first. If it's invisible to the user and paranoid under the hood, it's working.",
+        "Authentication has many variants and each has its own trade-offs in terms of security, usability, and complexity.",
     },
     githubUrl: "https://flow-office.vercel.app",
     liveUrl: "https://flow-office.vercel.app",
@@ -214,7 +214,7 @@ export const projects: Project[] = [
         "Structured error codes (200 / 400 / 404 / 502 / 500) instead of string messages.",
       ],
       learned:
-        "Production ML isn't about the model — it's about the contract around the model. Threshold tuning and error taxonomy are the real engineering.",
+        "Error Taxonomy is a thing. A well-defined contract with structured error codes is invaluable for ML endpoints to determine failure modes and debugging",
     },
     githubUrl: "https://github.com/Vincenthe3231/human-api",
     liveUrl: "https://human-api-blond.vercel.app",
@@ -243,7 +243,7 @@ export const projects: Project[] = [
         "Puppeteer + Lighthouse scripts for automated performance budgets under /artifacts.",
       ],
       learned:
-        "Frontier products live or die on their boring foundation. Multi-tenancy, isolation and a credentialed runtime are what make 'AI canvas' more than a demo.",
+        "Frontier products matter at performance which significantly affects UX. Investing in rendering optimizations and performance monitoring from day one pays off in user engagement and retention.",
     },
     githubUrl: "https://github.com/belive-ventures/vision-forge",
   },
