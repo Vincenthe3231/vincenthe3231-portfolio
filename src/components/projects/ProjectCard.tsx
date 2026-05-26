@@ -2,6 +2,7 @@ import { useRef, useState, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { TechBadge } from "../shared/TechBadge";
+import { BabylonShowcase } from "./BabylonShowcase";
 
 interface Props {
   project: Project;
@@ -12,6 +13,7 @@ interface Props {
 export const ProjectCard = ({ project, index, onOpen }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -24,7 +26,10 @@ export const ProjectCard = ({ project, index, onOpen }: Props) => {
     setTilt({ x: rotX, y: rotY });
   };
 
-  const reset = () => setTilt({ x: 0, y: 0 });
+  const reset = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -50,6 +55,7 @@ export const ProjectCard = ({ project, index, onOpen }: Props) => {
         onClick={() => onOpen(project)}
         onKeyDown={onKey}
         onMouseMove={handleMove}
+        onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={reset}
         style={{
           transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
@@ -59,11 +65,18 @@ export const ProjectCard = ({ project, index, onOpen }: Props) => {
         }}
         className="relative h-full overflow-hidden rounded-3xl border border-foreground/10 bg-surface/60 p-8 backdrop-blur-xl transition-shadow duration-300 hover:shadow-[0_30px_80px_-20px_var(--p)]"
       >
-        {/* Accent glow blob */}
+        {/* Babylon.js 3D showcase on hover */}
+        <BabylonShowcase projectId={project.id} isHovered={isHovered} />
+
+        {/* Accent glow blob — aurora shift on hover */}
         <div
           aria-hidden
-          className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-40 blur-3xl transition-opacity duration-500 group-hover:opacity-70"
-          style={{ background: `hsl(var(${project.accentVar}) / 0.5)` }}
+          className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-40 blur-3xl transition-all duration-700 group-hover:opacity-70"
+          style={{
+            background: isHovered
+              ? `linear-gradient(135deg, hsl(var(--aurora-green) / 0.4), hsl(var(--aurora-violet) / 0.4))`
+              : `hsl(var(${project.accentVar}) / 0.5)`,
+          }}
         />
 
         {/* Live badge */}

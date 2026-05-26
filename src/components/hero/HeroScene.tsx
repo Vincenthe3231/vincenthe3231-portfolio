@@ -1,6 +1,9 @@
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Environment } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
+import { AuroraBackground } from "@/aurora/AuroraBackground";
+import { RefractionSphere } from "./RefractionSphere";
 
 const PARTICLE_COUNT = 1800;
 
@@ -88,7 +91,10 @@ const HeroScene = () => {
       dpr={[1, 1.5]}
       style={{ pointerEvents: "none" }}
     >
+      <AuroraBackground />
       <ParticleField />
+      <RefractionSphere />
+      <Environment preset="night" />
     </Canvas>
   );
 };

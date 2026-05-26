@@ -4,13 +4,36 @@ import { Github, Linkedin, Mail } from "lucide-react";
 export const Footer = () => {
   return (
     <footer id="contact" className="relative section-pad pt-24 pb-12 overflow-hidden">
-      {/* Ambient glow */}
+      {/* Aurora reflection glow — replaces static radial gradient */}
       <div
         aria-hidden
-        className="absolute inset-x-0 -top-20 h-80 pointer-events-none"
+        className="absolute inset-x-0 -top-20 h-96 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse at center top, hsl(var(--accent) / 0.18), transparent 70%)",
+          background: `
+            radial-gradient(ellipse at 30% top, hsl(var(--aurora-green) / 0.12), transparent 50%),
+            radial-gradient(ellipse at 60% top, hsl(var(--aurora-cyan) / 0.18), transparent 50%),
+            radial-gradient(ellipse at 80% top, hsl(var(--aurora-violet) / 0.10), transparent 50%)
+          `,
+          animation: "aurora-footer-drift 12s ease-in-out infinite alternate",
+        }}
+      />
+
+      {/* Aurora water reflection ripple effect */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-48 pointer-events-none opacity-30"
+        style={{
+          background: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              hsl(var(--aurora-teal) / 0.04) 2px,
+              transparent 4px
+            )
+          `,
+          maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+          animation: "aurora-ripple 4s ease-in-out infinite",
         }}
       />
 
@@ -54,7 +77,7 @@ export const Footer = () => {
             Vincenthe · Internship Portfolio · 2025
           </span>
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">
-            Built with React · Three.js · Framer Motion
+            Built with React · Three.js · Babylon.js · PixiJS · Framer Motion
           </span>
         </div>
       </div>
@@ -74,11 +97,11 @@ const FooterLink = ({ icon: Icon, label, value, href }: FooterLinkProps) => (
     href={href}
     target={href.startsWith("http") ? "_blank" : undefined}
     rel="noopener noreferrer"
-    className="group glass rounded-2xl p-6 hover:border-accent/40 transition-colors"
+    className="group glass rounded-2xl p-6 transition-all duration-300 hover:border-aurora-teal/40 hover:shadow-[0_0_30px_hsl(var(--aurora-teal)/0.15)]"
   >
     <div className="flex gap-4">
       <span
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-foreground/10 bg-surface/50 text-accent transition-colors group-hover:border-accent/35 group-hover:bg-accent/10"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-foreground/10 bg-surface/50 text-accent transition-all duration-300 group-hover:border-aurora-teal/40 group-hover:bg-aurora-teal/10 group-hover:shadow-[0_0_15px_hsl(var(--aurora-cyan)/0.2)]"
         aria-hidden
       >
         <Icon className="h-5 w-5" strokeWidth={1.5} />

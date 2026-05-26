@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "../shared/SectionHeader";
+import { AboutPhysicsElements } from "./AboutPhysicsElements";
 
 const decisions = [
   {
@@ -54,7 +55,8 @@ const decisions = [
 
 export const About = () => {
   return (
-    <section id="about" className="relative section-pad">
+    <section id="about" className="relative section-pad overflow-hidden">
+      <AboutPhysicsElements />
       <SectionHeader
         eyebrow="01 / About"
         title="I think in systems, not screens."
@@ -69,13 +71,15 @@ export const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-5 border-t border-foreground/[0.08] pl-4 hover:bg-foreground/[0.025] hover:pl-6 transition-all duration-200 rounded-r-lg"
+            className="group relative flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-5 border-t border-foreground/[0.08] pl-4 hover:bg-[hsl(var(--aurora-teal)/0.03)] hover:pl-6 transition-all duration-300 rounded-r-lg"
           >
-            {/* Hover accent bar */}
+            {/* Hover accent bar — aurora pulse */}
             <div
               aria-hidden
               className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-              style={{ background: `hsl(var(${d.accentVar}))` }}
+              style={{
+                background: `linear-gradient(to bottom, hsl(var(--aurora-green)), hsl(var(${d.accentVar})), hsl(var(--aurora-violet)))`,
+              }}
             />
 
             {/* Project tag */}

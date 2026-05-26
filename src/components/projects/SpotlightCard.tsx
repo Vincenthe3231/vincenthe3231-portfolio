@@ -2,6 +2,7 @@ import { useRef, useState, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { TechBadge } from "../shared/TechBadge";
+import { BabylonShowcase } from "./BabylonShowcase";
 
 interface Props {
   project: Project;
@@ -12,6 +13,7 @@ interface Props {
 export const SpotlightCard = ({ project, index, onOpen }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -22,7 +24,10 @@ export const SpotlightCard = ({ project, index, onOpen }: Props) => {
     setTilt({ x: -(py - 0.5) * 8, y: (px - 0.5) * 10 });
   };
 
-  const reset = () => setTilt({ x: 0, y: 0 });
+  const reset = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -48,20 +53,32 @@ export const SpotlightCard = ({ project, index, onOpen }: Props) => {
           ["--p" as never]: `hsl(var(${project.accentVar}))`,
         }}
         onMouseMove={handleMove}
+        onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={reset}
         className="relative h-full overflow-hidden rounded-3xl border border-foreground/10 bg-surface/60 backdrop-blur-xl hover:shadow-[0_40px_100px_-20px_var(--p)] hover:border-foreground/20 transition-all duration-500"
       >
-        {/* Primary glow blob */}
+        {/* Babylon.js 3D showcase on hover */}
+        <BabylonShowcase projectId={project.id} isHovered={isHovered} />
+
+        {/* Primary glow blob — aurora shift on hover */}
         <div
           aria-hidden
-          className="absolute -top-28 -right-28 h-80 w-80 rounded-full opacity-35 blur-3xl transition-opacity duration-500 group-hover:opacity-65"
-          style={{ background: `hsl(var(${project.accentVar}) / 0.55)` }}
+          className="absolute -top-28 -right-28 h-80 w-80 rounded-full opacity-35 blur-3xl transition-all duration-700 group-hover:opacity-65"
+          style={{
+            background: isHovered
+              ? `linear-gradient(135deg, hsl(var(--aurora-teal) / 0.5), hsl(var(--aurora-magenta) / 0.4))`
+              : `hsl(var(${project.accentVar}) / 0.55)`,
+          }}
         />
-        {/* Secondary glow blob */}
+        {/* Secondary glow blob — aurora shift */}
         <div
           aria-hidden
-          className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full opacity-20 blur-3xl transition-opacity duration-700 group-hover:opacity-40"
-          style={{ background: `hsl(var(${project.accentVar}) / 0.3)` }}
+          className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full opacity-20 blur-3xl transition-all duration-700 group-hover:opacity-40"
+          style={{
+            background: isHovered
+              ? `linear-gradient(135deg, hsl(var(--aurora-green) / 0.3), hsl(var(--aurora-cyan) / 0.3))`
+              : `hsl(var(${project.accentVar}) / 0.3)`,
+          }}
         />
 
         {/* Pulsing Live badge - top right */}

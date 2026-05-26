@@ -6,24 +6,33 @@ import { Lessons } from "@/components/lessons/Lessons";
 import { Timeline } from "@/components/timeline/Timeline";
 import { Footer } from "@/components/footer/Footer";
 import { CustomCursor } from "@/components/shared/CustomCursor";
+import { SectionTransition } from "@/components/shared/SectionTransition";
+import { AuroraProvider } from "@/aurora/AuroraProvider";
+import { AuroraPixiOverlay } from "@/aurora/AuroraPixiOverlay";
+import { PhysicsParallaxProvider } from "@/physics/PhysicsParallaxProvider";
 
 const Index = () => {
   return (
-    <main className="relative">
-      <CustomCursor />
-      <Hero />
-      <div className="hairline" />
-      <About />
-      <div className="hairline" />
-      <Projects />
-      <div className="hairline" />
-      <Skills />
-      <div className="hairline" />
-      <Lessons />
-      <div className="hairline" />
-      <Timeline />
-      <Footer />
-    </main>
+    <AuroraProvider>
+      <PhysicsParallaxProvider bodyCount={8}>
+        <AuroraPixiOverlay />
+        <main className="relative">
+          <CustomCursor />
+          <Hero />
+          <SectionTransition />
+          <About />
+          <SectionTransition />
+          <Projects />
+          <SectionTransition />
+          <Skills />
+          <SectionTransition />
+          <Lessons />
+          <SectionTransition />
+          <Timeline />
+          <Footer />
+        </main>
+      </PhysicsParallaxProvider>
+    </AuroraProvider>
   );
 };
 

@@ -43,6 +43,15 @@ export default {
           human: "hsl(var(--p-human))",
           vision: "hsl(var(--p-vision))",
         },
+        aurora: {
+          green: "hsl(var(--aurora-green))",
+          teal: "hsl(var(--aurora-teal))",
+          cyan: "hsl(var(--aurora-cyan))",
+          blue: "hsl(var(--aurora-blue))",
+          violet: "hsl(var(--aurora-violet))",
+          magenta: "hsl(var(--aurora-magenta))",
+          pink: "hsl(var(--aurora-pink))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
