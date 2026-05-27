@@ -1,30 +1,21 @@
-import { Suspense, lazy } from "react";
-import { motion } from "framer-motion";
-
-const HeroScene = lazy(() => import("./HeroScene"));
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const keywords = ["TypeScript", "Laravel", "Next.js", "Django", "Supabase"];
 
 export const Hero = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Hero text slides up and fades as user scrolls (parallax against 3D background)
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -120]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
-      {/* 3D background */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
-        <Suspense fallback={null}>
-          <HeroScene />
-        </Suspense>
-      </div>
-
-      {/* Vignette */}
-      <div
-        aria-hidden
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 30%, hsl(var(--background) / 0.85) 85%)",
-        }}
-      />
-
+    <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden">
       {/* Top nav strip */}
       <div className="relative z-10 flex items-center justify-between px-6 md:px-12 lg:px-20 py-8">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
@@ -35,8 +26,11 @@ export const Hero = () => {
         </span>
       </div>
 
-      {/* Hero content */}
-      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col justify-center px-6 md:px-12 lg:px-20">
+      {/* Hero content with scroll parallax */}
+      <motion.div
+        style={{ y: heroY, opacity: heroOpacity }}
+        className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col justify-center px-6 md:px-12 lg:px-20"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,9 +58,9 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-2xl text-xl md:text-2xl text-foreground/80 text-balance"
         >
-          End-to-end full-stack ownership.{" "}
-          <span className="text-accent">TypeScript-first.</span>{" "}
-          <span className="text-foreground/60">Production mindset.</span>
+          End-to-end full-stack development.{" "}<br />
+          <span className="text-accent">Production mindset.</span>{" "}
+          {/* <span className="text-foreground/60">Production mindset.</span> */}
         </motion.p>
 
         <motion.div
@@ -87,7 +81,7 @@ export const Hero = () => {
             </motion.span>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div

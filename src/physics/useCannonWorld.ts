@@ -45,7 +45,7 @@ export function useCannonWorld(options: CannonWorldOptions = {}) {
           (Math.random() - 0.5) * 200,
           0
         ),
-        linearDamping: 0.85,
+        linearDamping: 0.6,
         angularDamping: 0.9,
       });
       world.addBody(body);

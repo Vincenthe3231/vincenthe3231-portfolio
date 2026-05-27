@@ -1,12 +1,37 @@
+export type NebulaArchetype =
+  | "pillar"
+  | "ring"
+  | "supernova"
+  | "ionStorm"
+  | "molecular"
+  | "binary"
+  | "protoplanetary"
+  | "darkNebula";
+
+export interface NebulaSpec {
+  archetype: NebulaArchetype;
+  colorPrimary: string;   // ionization core color
+  colorSecondary: string; // outer gas color
+  orbit: {
+    radius: number;
+    theta: number;     // radians around galactic center
+    armIndex: 0 | 1 | 2 | 3;
+    elevation: number; // y offset
+  };
+  scale: number;
+  rotationSpeed: number;
+  turbulence: number; // 0..1
+}
+
 export interface Project {
   id: string;
   title: string;
   tagline: string;
   domain: string;
   role: string;
-  accentVar: string; // CSS var name for project accent
-  accentClass: string; // Tailwind class for accent text
-  glowFrom: string; // tailwind gradient class
+  accentVar: string;
+  accentClass: string;
+  glowFrom: string;
   glowTo: string;
   techStack: string[];
   featureCallout: string;
@@ -18,6 +43,7 @@ export interface Project {
   };
   githubUrl: string;
   liveUrl?: string;
+  nebula: NebulaSpec;
 }
 
 export const projects: Project[] = [
@@ -48,6 +74,15 @@ export const projects: Project[] = [
         "The best UI is useless if it doesn't reflect the true state of the world. Server-driven UI with Inertia.js keeps the client honest without sacrificing interactivity or UX.",
     },
     githubUrl: "https://github.com/Vincenthe3231/ownerUI/tree/finalv2",
+    nebula: {
+      archetype: "pillar",
+      colorPrimary: "#ffb86b",
+      colorSecondary: "#3b2240",
+      orbit: { radius: 12, theta: 0.4, armIndex: 0, elevation: 0.6 },
+      scale: 1.05,
+      rotationSpeed: 0.04,
+      turbulence: 0.55,
+    },
   },
   {
     id: "renoxpert-client",
@@ -76,6 +111,15 @@ export const projects: Project[] = [
         "Monorepo is an effective container for related but distinct products, but only if the shared layer is well-factored and the deployment strategy respects the differences.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Client",
+    nebula: {
+      archetype: "protoplanetary",
+      colorPrimary: "#8ad3ff",
+      colorSecondary: "#1b3050",
+      orbit: { radius: 14, theta: 1.3, armIndex: 1, elevation: -0.4 },
+      scale: 1.0,
+      rotationSpeed: 0.06,
+      turbulence: 0.35,
+    },
   },
   {
     id: "renoxpert-backend",
@@ -104,6 +148,15 @@ export const projects: Project[] = [
         "Developer experience is vital, combination of Docker and Laravel Sail is way superior to XAMPP for backend services management.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Backend",
+    nebula: {
+      archetype: "darkNebula",
+      colorPrimary: "#5e7fbd",
+      colorSecondary: "#0a1428",
+      orbit: { radius: 16, theta: 2.2, armIndex: 2, elevation: 0.3 },
+      scale: 0.9,
+      rotationSpeed: 0.03,
+      turbulence: 0.7,
+    },
   },
   {
     id: "belive-client",
@@ -133,6 +186,15 @@ export const projects: Project[] = [
     },
     githubUrl: "https://flow-office.vercel.app",
     liveUrl: "https://flow-office.vercel.app",
+    nebula: {
+      archetype: "ring",
+      colorPrimary: "#a8e8ff",
+      colorSecondary: "#2a4d7a",
+      orbit: { radius: 6.5, theta: 0.0, armIndex: 0, elevation: 0.2 },
+      scale: 1.6,
+      rotationSpeed: 0.08,
+      turbulence: 0.4,
+    },
   },
   {
     id: "belive-backend",
@@ -161,6 +223,15 @@ export const projects: Project[] = [
         "Boundaries are cheap to draw and expensive to add later. A modular monolith buys you the option to split without vendor lock-in issues.",
     },
     githubUrl: "https://github.com/Belive-FO/Belive-FO-Backend",
+    nebula: {
+      archetype: "molecular",
+      colorPrimary: "#b89cff",
+      colorSecondary: "#241a3d",
+      orbit: { radius: 13.5, theta: 3.6, armIndex: 3, elevation: -0.7 },
+      scale: 1.0,
+      rotationSpeed: 0.025,
+      turbulence: 0.6,
+    },
   },
   {
     id: "witsnote",
@@ -189,6 +260,15 @@ export const projects: Project[] = [
         "Polyglot stacks live or die on the contract between languages. Pin the API, and the rest follows.",
     },
     githubUrl: "https://github.com/Vincenthe3231/WitsNote",
+    nebula: {
+      archetype: "binary",
+      colorPrimary: "#ffd28a",
+      colorSecondary: "#3a2418",
+      orbit: { radius: 15, theta: 4.5, armIndex: 0, elevation: 0.8 },
+      scale: 0.95,
+      rotationSpeed: 0.07,
+      turbulence: 0.45,
+    },
   },
   {
     id: "human-api",
@@ -214,10 +294,19 @@ export const projects: Project[] = [
         "Structured error codes (200 / 400 / 404 / 502 / 500) instead of string messages.",
       ],
       learned:
-        "Error Taxonomy is a thing. A well-defined contract with structured error codes is invaluable for ML endpoints to determine failure modes and debugging",
+        "Error Taxonomy is a thing. A well-defined contract with structured error codes is indispensable for ML endpoints to determine failure modes and debugging",
     },
     githubUrl: "https://github.com/Vincenthe3231/human-api",
     liveUrl: "https://human-api-blond.vercel.app",
+    nebula: {
+      archetype: "supernova",
+      colorPrimary: "#ff7d5a",
+      colorSecondary: "#5a1830",
+      orbit: { radius: 7.5, theta: 3.4, armIndex: 2, elevation: -0.3 },
+      scale: 1.6,
+      rotationSpeed: 0.05,
+      turbulence: 0.85,
+    },
   },
   {
     id: "vision-forge",
@@ -246,5 +335,14 @@ export const projects: Project[] = [
         "Frontier products matter at performance which significantly affects UX. Investing in rendering optimizations and performance monitoring from day one pays off in user engagement and retention.",
     },
     githubUrl: "https://github.com/belive-ventures/vision-forge",
+    nebula: {
+      archetype: "ionStorm",
+      colorPrimary: "#7afff0",
+      colorSecondary: "#10324a",
+      orbit: { radius: 17, theta: 5.3, armIndex: 1, elevation: 0.5 },
+      scale: 1.05,
+      rotationSpeed: 0.09,
+      turbulence: 0.95,
+    },
   },
 ];

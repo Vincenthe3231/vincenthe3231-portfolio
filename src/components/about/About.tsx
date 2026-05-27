@@ -56,11 +56,19 @@ const decisions = [
 export const About = () => {
   return (
     <section id="about" className="relative section-pad overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, hsl(var(--background) / 0.0) 0%, hsl(var(--background) / 0.45) 70%, hsl(var(--background) / 0.6) 100%)",
+        }}
+      />
       <AboutPhysicsElements />
       <SectionHeader
         eyebrow="01 / About"
         title="I think in systems, not screens."
-        description="Eight projects across renovation, field operations, academic productivity, biometrics and AI tooling — each owned across the stack, each shipped to production."
+        description="Eight projects across renovation, internal operations, productivity, biometrics, pipeline, and AI tooling."
       />
 
       <div className="mt-20">
@@ -70,7 +78,7 @@ export const About = () => {
             initial={{ opacity: 0, x: -12 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ type: "spring", stiffness: 120, damping: 18, mass: 1, delay: i * 0.08 }}
             className="group relative flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-5 border-t border-foreground/[0.08] pl-4 hover:bg-[hsl(var(--aurora-teal)/0.03)] hover:pl-6 transition-all duration-300 rounded-r-lg"
           >
             {/* Hover accent bar — aurora pulse */}
@@ -111,7 +119,7 @@ export const About = () => {
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, mass: 1 }}
         className="mt-12 glass rounded-2xl overflow-hidden"
       >
         <div className="flex items-center gap-2 border-b border-foreground/10 px-5 py-3">

@@ -21,6 +21,14 @@ export const Timeline = () => {
 
   return (
     <section id="timeline" className="relative section-pad">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, hsl(var(--background) / 0.0) 0%, hsl(var(--background) / 0.45) 70%, hsl(var(--background) / 0.6) 100%)",
+        }}
+      />
       <SectionHeader
         eyebrow="05 / Journey"
         title="The arc of an internship."
@@ -43,7 +51,7 @@ export const Timeline = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ type: "spring", stiffness: 120, damping: 18, mass: 1 }}
                 className={`relative flex flex-col md:flex-row gap-6 md:gap-12 items-start ${
                   isLeft ? "" : "md:flex-row-reverse"
                 }`}

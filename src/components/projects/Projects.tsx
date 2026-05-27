@@ -1,64 +1,47 @@
-import { useState } from "react";
-import { projects, type Project } from "@/data/projects";
-import { ProjectCard } from "./ProjectCard";
-import { SpotlightCard } from "./SpotlightCard";
-import { ProjectModal } from "./ProjectModal";
+import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeader } from "../shared/SectionHeader";
+import { GalaxyScene } from "./galaxy/GalaxyScene";
 
 export const Projects = () => {
-  const [active, setActive] = useState<Project | null>(null);
-
-  const liveProjects = projects.filter((p) => p.liveUrl);
-  const otherProjects = projects.filter((p) => !p.liveUrl);
+  const reduced = useReducedMotion();
 
   return (
     <section id="projects" className="relative section-pad">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, hsl(var(--background) / 0.0) 0%, hsl(var(--background) / 0.55) 70%, hsl(var(--background) / 0.7) 100%)",
+        }}
+      />
       <SectionHeader
         eyebrow="02 / Work"
         title="Eight things I shipped."
-        description="Each one owned across the stack. Each one running for real users in real organisations."
+        description="Each project is a nebula in the galaxy below — drag to orbit, scroll to zoom, click a formation to read the story."
       />
 
-      <div className="mt-20 space-y-6">
-        {/* Spotlighted live projects */}
-        {liveProjects.length > 0 && (
-          <div className="grid gap-6 md:grid-cols-2">
-            {liveProjects.map((p) => (
-              <SpotlightCard
-                key={p.id}
-                project={p}
-                index={projects.indexOf(p)}
-                onOpen={setActive}
-              />
-            ))}
-          </div>
-        )}
+      <div className="mt-12 relative w-full">
+        <div
+          className="relative w-full overflow-hidden rounded-2xl border border-foreground/8 bg-[#04060c]"
+          style={{ aspectRatio: "16 / 10", maxHeight: "82vh" }}
+        >
+          <GalaxyScene />
 
-        {/* Divider */}
-        {liveProjects.length > 0 && otherProjects.length > 0 && (
-          <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 h-px bg-foreground/8" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/25">
-              Other Projects
+          {/* Interaction hint */}
+          <motion.div
+            aria-hidden
+            initial={reduced ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/70 whitespace-nowrap px-3 py-1.5 rounded-full bg-background/40 backdrop-blur-md border border-foreground/10">
+              drag · scroll · click a nebula
             </span>
-            <div className="flex-1 h-px bg-foreground/8" />
-          </div>
-        )}
-
-        {/* Regular grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {otherProjects.map((p) => (
-            <ProjectCard
-              key={p.id}
-              project={p}
-              index={projects.indexOf(p)}
-              onOpen={setActive}
-            />
-          ))}
+          </motion.div>
         </div>
       </div>
-
-      <ProjectModal project={active} onClose={() => setActive(null)} />
     </section>
   );
 };

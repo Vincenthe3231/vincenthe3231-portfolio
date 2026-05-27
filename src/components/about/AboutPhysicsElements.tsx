@@ -3,14 +3,20 @@ import { usePhysicsParallaxContext } from "@/physics/PhysicsParallaxProvider";
 import { useAurora } from "@/aurora/AuroraProvider";
 
 const SHAPES = [
-  { type: "triangle", size: 18, colorVar: "--aurora-green" },
-  { type: "circle", size: 14, colorVar: "--aurora-teal" },
-  { type: "hexagon", size: 16, colorVar: "--aurora-cyan" },
-  { type: "triangle", size: 12, colorVar: "--aurora-violet" },
-  { type: "diamond", size: 15, colorVar: "--aurora-magenta" },
-  { type: "circle", size: 10, colorVar: "--aurora-blue" },
-  { type: "hexagon", size: 13, colorVar: "--aurora-pink" },
-  { type: "diamond", size: 11, colorVar: "--aurora-green" },
+  { type: "triangle", size: 45, colorVar: "--aurora-green" },
+  { type: "circle", size: 35, colorVar: "--aurora-teal" },
+  { type: "hexagon", size: 40, colorVar: "--aurora-cyan" },
+  { type: "triangle", size: 30, colorVar: "--aurora-violet" },
+  { type: "diamond", size: 38, colorVar: "--aurora-magenta" },
+  { type: "circle", size: 25, colorVar: "--aurora-blue" },
+  { type: "hexagon", size: 33, colorVar: "--aurora-pink" },
+  { type: "diamond", size: 28, colorVar: "--aurora-green" },
+  { type: "triangle", size: 42, colorVar: "--aurora-teal" },
+  { type: "circle", size: 30, colorVar: "--aurora-violet" },
+  { type: "hexagon", size: 36, colorVar: "--aurora-cyan" },
+  { type: "diamond", size: 32, colorVar: "--aurora-blue" },
+  { type: "triangle", size: 26, colorVar: "--aurora-magenta" },
+  { type: "circle", size: 38, colorVar: "--aurora-green" },
 ];
 
 function ShapeSVG({ type, size }: { type: string; size: number }) {
@@ -47,6 +53,7 @@ function ShapeSVG({ type, size }: { type: string; size: number }) {
 /**
  * Floating geometric shapes driven by Cannon.js physics parallax.
  * Positioned absolutely within the About section.
+ * 2.5x bigger, 50% opacity, 14 shapes (up from 8).
  */
 export function AboutPhysicsElements() {
   const { getTransform } = usePhysicsParallaxContext();
@@ -89,11 +96,11 @@ export function AboutPhysicsElements() {
           ref={(el) => {
             elementsRef.current[i] = el;
           }}
-          className="absolute opacity-15 will-change-transform"
+          className="absolute opacity-50 will-change-transform"
           style={{
             color: `hsl(var(${shape.colorVar}))`,
-            left: `${10 + (i * 80) / count}%`,
-            top: `${15 + ((i * 37) % 70)}%`,
+            left: `${5 + (i * 90) / count}%`,
+            top: `${10 + ((i * 37) % 80)}%`,
           }}
         >
           <svg

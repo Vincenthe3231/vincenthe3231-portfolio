@@ -71,6 +71,14 @@ const AuroraLightCard = ({
 export const Lessons = () => {
   return (
     <section id="lessons" className="relative section-pad">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, hsl(var(--background) / 0.0) 0%, hsl(var(--background) / 0.45) 70%, hsl(var(--background) / 0.6) 100%)",
+        }}
+      />
       <SectionHeader
         eyebrow="04 / Lessons"
         title="Eight ships. Eight lessons."

@@ -10,13 +10,18 @@ import { SectionTransition } from "@/components/shared/SectionTransition";
 import { AuroraProvider } from "@/aurora/AuroraProvider";
 import { AuroraPixiOverlay } from "@/aurora/AuroraPixiOverlay";
 import { PhysicsParallaxProvider } from "@/physics/PhysicsParallaxProvider";
+import { SceneBackground } from "@/components/scene/SceneBackground";
 
 const Index = () => {
   return (
     <AuroraProvider>
-      <PhysicsParallaxProvider bodyCount={8}>
+      <PhysicsParallaxProvider bodyCount={14}>
+        {/* Persistent 3D canvas — fixed behind everything */}
+        <SceneBackground />
+        {/* PixiJS caustic overlay */}
         <AuroraPixiOverlay />
-        <main className="relative">
+        {/* DOM content */}
+        <main className="relative z-10">
           <CustomCursor />
           <Hero />
           <SectionTransition />
