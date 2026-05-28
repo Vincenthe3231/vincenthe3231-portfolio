@@ -1,10 +1,4 @@
 import { useRef, useEffect, useCallback } from "react";
-import * as CANNON from "cannon-es";
-
-interface CannonWorldOptions {
-  gravity?: [number, number, number];
-  bodyCount?: number;
-}
 
 export interface CannonBodyState {
   x: number;
@@ -16,85 +10,78 @@ export interface CannonBodyState {
   qw: number;
 }
 
-/**
- * Cannon-es 3D physics world for parallax elements.
- * Zero gravity by default — scroll/mouse apply forces.
- */
-export function useCannonWorld(options: CannonWorldOptions = {}) {
+interface WorldOptions {
+  gravity?: [number, number, number];
+  bodyCount?: number;
+}
+
+type RapierBody = { translation(): {x:number;y:number;z:number}; rotation(): {x:number;y:number;z:number;w:number}; addForce(f:{x:number;y:number;z:number}, wake:boolean):void; sleep():void; wakeUp():void; };
+type RapierWorld = { step():void; timestep: number; };
+
+export function useCannonWorld(options: WorldOptions = {}) {
   const { gravity = [0, 0, 0], bodyCount = 8 } = options;
-  const worldRef = useRef<CANNON.World | null>(null);
-  const bodiesRef = useRef<CANNON.Body[]>([]);
+  const worldRef  = useRef<RapierWorld | null>(null);
+  const bodiesRef = useRef<RapierBody[]>([]);
   const statesRef = useRef<CannonBodyState[]>([]);
 
   useEffect(() => {
-    const world = new CANNON.World({
-      gravity: new CANNON.Vec3(...gravity),
-    });
-    world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 5;
+    let cancelled = false;
 
-    const bodies: CANNON.Body[] = [];
-    const states: CannonBodyState[] = [];
+    (async () => {
+      const RAPIER = await import("@dimforge/rapier3d-compat");
+      await RAPIER.init();
+      if (cancelled) return;
 
-    for (let i = 0; i < bodyCount; i++) {
-      const body = new CANNON.Body({
-        mass: 0.1,
-        shape: new CANNON.Sphere(0.5),
-        position: new CANNON.Vec3(
-          (Math.random() - 0.5) * 400,
-          (Math.random() - 0.5) * 200,
-          0
-        ),
-        linearDamping: 0.6,
-        angularDamping: 0.9,
-      });
-      world.addBody(body);
-      bodies.push(body);
-      states.push({ x: 0, y: 0, z: 0, qx: 0, qy: 0, qz: 0, qw: 1 });
-    }
+      const world = new RAPIER.World({ x: gravity[0], y: gravity[1], z: gravity[2] });
+      world.numSolverIterations = 5;
 
-    worldRef.current = world;
-    bodiesRef.current = bodies;
-    statesRef.current = states;
+      const bodies: RapierBody[] = [];
+      const states: CannonBodyState[] = [];
+
+      for (let i = 0; i < bodyCount; i++) {
+        const px = (Math.random() - 0.5) * 400;
+        const py = (Math.random() - 0.5) * 200;
+        const bodyDesc = RAPIER.RigidBodyDesc.dynamic()
+          .setTranslation(px, py, 0)
+          .setLinearDamping(0.6)
+          .setAngularDamping(0.9);
+        const body = world.createRigidBody(bodyDesc);
+        world.createCollider(RAPIER.ColliderDesc.ball(0.5).setSensor(true), body);
+        bodies.push(body);
+        states.push({ x: px, y: py, z: 0, qx: 0, qy: 0, qz: 0, qw: 1 });
+      }
+
+      worldRef.current  = world as unknown as RapierWorld;
+      bodiesRef.current = bodies;
+      statesRef.current = states;
+    })();
 
     return () => {
-      world.bodies.forEach((b) => world.removeBody(b));
-      worldRef.current = null;
+      cancelled = true;
+      worldRef.current  = null;
       bodiesRef.current = [];
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bodyCount, gravity[0], gravity[1], gravity[2]]);
 
-  /** Step the world and read body positions into statesRef */
   const step = useCallback((dt: number) => {
     const world = worldRef.current;
     if (!world) return;
-
-    // Fixed timestep w/ accumulator capped at 3 substeps
-    world.step(1 / 60, dt * 0.001, 3);
-
+    world.timestep = Math.min(dt * 0.001, 1 / 30);
+    world.step();
     bodiesRef.current.forEach((body, i) => {
-      statesRef.current[i] = {
-        x: body.position.x,
-        y: body.position.y,
-        z: body.position.z,
-        qx: body.quaternion.x,
-        qy: body.quaternion.y,
-        qz: body.quaternion.z,
-        qw: body.quaternion.w,
-      };
+      const t = body.translation();
+      const r = body.rotation();
+      statesRef.current[i] = { x: t.x, y: t.y, z: t.z, qx: r.x, qy: r.y, qz: r.z, qw: r.w };
     });
   }, []);
 
-  /** Apply force to all bodies (e.g., from scroll velocity) */
   const applyForce = useCallback((fx: number, fy: number, fz: number = 0) => {
-    const force = new CANNON.Vec3(fx, fy, fz);
     bodiesRef.current.forEach((body) => {
-      body.applyForce(force);
-      body.wakeUp();
+      body.addForce({ x: fx, y: fy, z: fz }, true);
     });
   }, []);
 
-  /** Freeze/unfreeze all bodies */
   const setSleeping = useCallback((sleeping: boolean) => {
     bodiesRef.current.forEach((body) => {
       if (sleeping) body.sleep();

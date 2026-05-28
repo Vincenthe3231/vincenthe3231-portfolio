@@ -22,6 +22,8 @@ export function AuroraBackground() {
       uTime: { value: 0 },
       uScroll: { value: 0 },
       uMouse: { value: new THREE.Vector2(0, 0) },
+      uMouseVelocity: { value: new THREE.Vector2(0, 0) },
+      uScrollVelocity: { value: 0 },
       uIntensity: { value: 0.8 },
       uOctaves: { value: config.auroraOctaves },
       uSceneMode: { value: 0 },
@@ -34,6 +36,8 @@ export function AuroraBackground() {
     shaderUniforms.uTime.value = u.time;
     shaderUniforms.uScroll.value = u.scroll;
     shaderUniforms.uMouse.value.set(u.mouseX, u.mouseY);
+    shaderUniforms.uMouseVelocity.value.set(u.mouseVelocityX, u.mouseVelocityY);
+    shaderUniforms.uScrollVelocity.value = u.scrollVelocity;
     shaderUniforms.uIntensity.value = u.sectionIntensity;
     shaderUniforms.uSceneMode.value = u.sceneMode;
 

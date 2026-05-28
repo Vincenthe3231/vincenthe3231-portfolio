@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import "@fontsource-variable/fraunces";
 import App from "./App.tsx";
 import "./index.css";
 

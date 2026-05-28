@@ -12,6 +12,7 @@ export default {
         display: ['"Bebas Neue"', "system-ui", "sans-serif"],
         body: ['"DM Sans"', "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        serif: ['"Fraunces Variable"', "Fraunces", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

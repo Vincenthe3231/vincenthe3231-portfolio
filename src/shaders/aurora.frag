@@ -3,6 +3,8 @@ precision highp float;
 uniform float uTime;
 uniform float uScroll;
 uniform vec2 uMouse;
+uniform vec2 uMouseVelocity;
+uniform float uScrollVelocity;
 uniform float uIntensity;
 uniform int uOctaves;
 uniform float uSceneMode; // 0 = aurora/hero, 1 = deep space
@@ -57,19 +59,15 @@ float warpedFbm(vec2 p, int octaves) {
   return fbm(p + 4.0 * r, octaves);
 }
 
-// Aurora color palette: green → teal → cyan → violet → magenta
+// Aurora palette: deep indigo → muted cyan → silver haze (restrained, atmospheric)
 vec3 auroraColor(float t) {
-  vec3 c0 = vec3(0.18, 0.65, 0.30);
-  vec3 c1 = vec3(0.20, 0.72, 0.58);
-  vec3 c2 = vec3(0.00, 0.90, 1.00);
-  vec3 c3 = vec3(0.50, 0.38, 0.85);
-  vec3 c4 = vec3(0.78, 0.30, 0.65);
+  vec3 c0 = vec3(0.039, 0.055, 0.173);  // #0a0e2c deep indigo
+  vec3 c1 = vec3(0.227, 0.663, 0.769);  // #3aa9c4 muted cyan
+  vec3 c2 = vec3(0.784, 0.831, 0.863);  // #c8d4dc silver haze
 
   t = clamp(t, 0.0, 1.0);
-  if (t < 0.25) return mix(c0, c1, t / 0.25);
-  if (t < 0.5) return mix(c1, c2, (t - 0.25) / 0.25);
-  if (t < 0.75) return mix(c2, c3, (t - 0.5) / 0.25);
-  return mix(c3, c4, (t - 0.75) / 0.25);
+  if (t < 0.55) return mix(c0, c1, t / 0.55);
+  return mix(c1, c2, (t - 0.55) / 0.45);
 }
 
 // Deep-space nebula palette: navy → blue → violet → magenta
@@ -91,13 +89,15 @@ void main() {
   float patternScale = mix(1.0, 0.45, uSceneMode);
   vec2 p = vec2(uv.x * 0.3, uv.y * 1.4) * patternScale;
 
-  // Time-based drift (slower in space mode)
+  // Time-based drift (slower in space mode), accelerated by scroll velocity
   float driftMul = mix(1.0, 0.55, uSceneMode);
-  p.y += uTime * 0.04 * driftMul;
-  p.x += uTime * 0.01 * driftMul;
+  float timeOffset = uTime * driftMul + uScrollVelocity * 0.4;
+  p.y += timeOffset * 0.04;
+  p.x += timeOffset * 0.01;
 
-  // Mouse wind (subtle)
+  // Mouse wind: position + velocity wake
   p += uMouse * 0.03;
+  p += uMouseVelocity * 0.15;
 
   // Scroll shifts pattern
   p.y -= uScroll * 0.5;
@@ -109,12 +109,16 @@ void main() {
   float curtain = sin(uv.x * 6.0 + pattern * 3.0 + uTime * 0.15) * 0.5 + 0.5;
   pattern = mix(pattern, curtain, 0.35 * (1.0 - uSceneMode));
 
-  // Vertical falloff — relaxed in space mode so nebula fills more screen
-  float baseMask = smoothstep(0.0, 0.08, uv.y) * smoothstep(1.0, 0.85, uv.y);
-  float verticalMask = mix(baseMask, 1.0, uSceneMode * 0.6);
+  // Vertical falloff — aurora lives in upper third; relaxed in space mode
+  float baseMask = smoothstep(0.35, 0.65, uv.y) * smoothstep(1.0, 0.82, uv.y);
+  // Silver haze crest: brighter top band
+  float crest = smoothstep(0.55, 0.85, uv.y) * 0.35;
+  float verticalMask = mix(baseMask + crest, 1.0, uSceneMode * 0.6);
 
   // Color: aurora → nebula
   float colorT = pattern * 0.5 + 0.25 + sin(uTime * 0.08) * 0.15;
+  // Bias colorT upward in the crest so silver haze appears
+  colorT = mix(colorT, max(colorT, 0.85), crest * (1.0 - uSceneMode));
   vec3 color = mix(auroraColor(colorT), nebulaColor(colorT), uSceneMode);
 
   // Final alpha

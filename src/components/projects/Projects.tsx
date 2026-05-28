@@ -16,7 +16,7 @@ export const Projects = () => {
         }}
       />
       <SectionHeader
-        eyebrow="02 / Work"
+        eyebrow="01 / Work"
         title="Eight things I shipped."
         description="Each project is a nebula in the galaxy below — drag to orbit, scroll to zoom, click a formation to read the story."
       />

@@ -1,5 +1,4 @@
 import { useRef, useCallback, useEffect } from "react";
-import * as CANNON from "cannon-es";
 import { useCannonWorld, CannonBodyState } from "./useCannonWorld";
 
 /**
@@ -52,8 +51,7 @@ export function usePhysicsParallax(bodyCount: number = 8) {
           const force = (200 - dist) * 0.02;
           const nx = dx / dist;
           const ny = dy / dist;
-          bodies[i].applyForce(new CANNON.Vec3(nx * force, ny * force, 0));
-          bodies[i].wakeUp();
+          bodies[i].addForce({ x: nx * force, y: ny * force, z: 0 }, true);
         }
       });
 
