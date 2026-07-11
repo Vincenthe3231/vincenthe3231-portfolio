@@ -7,89 +7,77 @@ interface Fragment {
   decision: string;
   metric: string;
   artifact?: string;
-  span: string; // tailwind column classes
 }
 
 const fragments: Fragment[] = [
   {
     tag: "ownerui",
     accentVar: "--p-owner",
-    decision: "Extracted six hooks and eight subcomponents from a monolithic file of 1,679 lines. The replacement is 171 lines that read top to bottom.",
+    decision: "I took a giant 1,679 line file that nobody wanted to touch and rebuilt it into 171 lines you can actually read top to bottom.",
     metric: "1,679 → 171",
     artifact: "useDelta · useFocusTrap · useShortcutMap · useFieldSync · useDraftQueue · useUndoStack",
-    span: "col-span-12 md:col-span-7",
   },
   {
     tag: "renoxpert",
     accentVar: "--p-reno",
-    decision: "Two apps inside one Turborepo, sharing @repo/ui. Same buttons, same forms, two product surfaces.",
+    decision: "Two apps, one shared toolbox of buttons and forms. Same look, same feel, built once and reused.",
     metric: "2 apps · 1 system",
-    span: "col-span-12 md:col-span-4 md:col-start-9",
   },
   {
     tag: "renoxpert",
     accentVar: "--p-reno",
-    decision: "Laravel Sail containerises PHP, MySQL and Redis under one compose file. Onboarding becomes a single command.",
+    decision: "The whole backend, database and cache run from one file. A new teammate goes from zero to running with a single command.",
     metric: "sail up",
-    span: "col-span-12 md:col-span-6 md:col-start-4",
   },
   {
     tag: "belive-client",
     accentVar: "--p-belive",
-    decision: "A Next.js BFF proxies every API call. The browser never sees a backend URL, never learns the shape of internal endpoints, and never holds a token outside an httpOnly cookie.",
+    decision: "Every request goes through a middle layer, so the browser never touches the real backend or holds a login token it could leak.",
     metric: "httpOnly only",
     artifact: "// next.config.ts\nrewrites: () => [{\n  source: '/api/:path*',\n  destination: 'https://internal.belive.local/:path*'\n}]",
-    span: "col-span-12 md:col-span-8",
   },
   {
     tag: "belive-backend",
     accentVar: "--p-belive",
-    decision: "Four Laravel modules with zero cross module model imports. Enforced, not aspirational. If we split into services later, the seams are already cut.",
+    decision: "I split the app into four separate parts that are not allowed to reach into each other. If we ever break them into services, the lines are already drawn.",
     metric: "clean boundary",
-    span: "col-span-12 md:col-span-5 md:col-start-5",
   },
   {
     tag: "witsnote",
     accentVar: "--p-wits",
-    decision: "Gemini 2.5 Flash replaces Tesseract for OCR. No binary dependency, no path that breaks outside Linux, no version pinning. The build manifest got shorter.",
+    decision: "Swapped a fiddly local text reader for a cloud one. No extra installs, nothing that only works on Linux, and a shorter setup.",
     metric: "cloud OCR",
-    span: "col-span-12 md:col-span-7 md:col-start-3",
   },
   {
     tag: "human-api",
     accentVar: "--p-human",
-    decision: "TensorFlow.js forced onto the CPU backend after the WASM cold start kept throwing ENOENT in serverless containers. Slower per inference, zero pages.",
+    decision: "The fast path kept crashing in the cloud, so I forced the safe one. A little slower per call, but it simply stopped failing.",
     metric: "0 ENOENT",
     artifact: "await tf.setBackend('cpu');\nawait tf.ready();",
-    span: "col-span-12 md:col-span-6",
   },
   {
     tag: "vision-forge",
     accentVar: "--p-vision",
-    decision: "Pixi.js culls the grid to the visible area. React Flow owns the logical layer. The render loop stops asking React anything.",
+    decision: "I let a lighter renderer handle the busy background, so the app only redraws what actually changed. It stays smooth even with a lot on screen.",
     metric: "rerenders ↓",
-    span: "col-span-12 md:col-span-5 md:col-start-7",
   },
   {
     tag: "witsos",
     accentVar: "--p-witsos",
-    decision: "One SQLite file per repository holds every symbol and edge. A question that used to be a dozen greps comes back as a single query, with source attached.",
+    decision: "Everything about a codebase lives in one small file. A question that used to take a dozen searches now comes back in one, with the code attached.",
     metric: "1 query",
-    span: "col-span-12 md:col-span-6 md:col-start-2",
   },
   {
     tag: "crawler",
     accentVar: "--p-crawl",
-    decision: "Cheerio reads every page first. Playwright only wakes up for pages that render thin or fail, so the browser bill tracks the difficulty of the web, not its size.",
+    decision: "The crawler reads pages the cheap way first. It only spins up a full browser for the pages that really need one, so it stays fast and cheap.",
     metric: "escalate on fail",
-    span: "col-span-12 md:col-span-5 md:col-start-8",
   },
   {
     tag: "witslog",
     accentVar: "--p-log",
-    decision: "The logger drops an event and counts it instead of blocking the caller. Backpressure is a decision made up front, not an incident discovered later.",
+    decision: "The logger never freezes the app it is watching. If it gets swamped, it drops a line and keeps going instead of grinding everything to a halt.",
     metric: "0 blocking",
-    span: "col-span-12 md:col-span-6 md:col-start-3",
   },
 ];
 
@@ -108,7 +96,7 @@ const FragmentBlock = ({ fragment, index }: { fragment: Fragment; index: number 
           ? { duration: 0.2 }
           : { type: "spring", stiffness: 80, damping: 22, mass: 1, delay: index * 0.06 }
       }
-      className={`group ${fragment.span}`}
+      className="group glass rounded-2xl p-6 md:p-7"
     >
       <div className="flex items-baseline gap-3 mb-3">
         <span
@@ -196,8 +184,8 @@ export const About = () => {
         </div>
       </header>
 
-      {/* Fragments — asymmetric editorial grid */}
-      <div className="max-w-[1400px] mx-auto mt-24 md:mt-32 grid grid-cols-12 gap-x-6 gap-y-20 md:gap-y-28">
+      {/* Fragments — uniform card grid */}
+      <div className="max-w-[1400px] mx-auto mt-24 md:mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-start">
         {fragments.slice(0, pullQuoteIndex).map((f, i) => (
           <FragmentBlock key={i} fragment={f} index={i} />
         ))}
@@ -228,7 +216,7 @@ export const About = () => {
       </motion.figure>
 
       {/* Remaining fragments */}
-      <div className="max-w-[1400px] mx-auto mt-24 md:mt-32 grid grid-cols-12 gap-x-6 gap-y-20 md:gap-y-28">
+      <div className="max-w-[1400px] mx-auto mt-24 md:mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 items-start">
         {fragments.slice(pullQuoteIndex + 1).map((f, i) => (
           <FragmentBlock key={i + pullQuoteIndex + 1} fragment={f} index={i} />
         ))}

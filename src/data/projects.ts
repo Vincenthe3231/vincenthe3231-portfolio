@@ -71,7 +71,7 @@ export const projects: Project[] = [
         "A PWA shell, so owners install once and reopen it like a native tool.",
       ],
       learned:
-        "The best UI is useless if it lies about the state of the world. Server driven UI through Inertia.js keeps the client honest without giving up interactivity.",
+        "A pretty screen means nothing if it shows the wrong thing. I let the server stay in charge of the truth, so what you see is always what is really there.",
     },
     githubUrl: "https://github.com/Vincenthe3231/ownerUI/tree/finalv2",
     nebula: {
@@ -108,7 +108,7 @@ export const projects: Project[] = [
         "Independent deploys per app. Shared code, separate release cadences.",
       ],
       learned:
-        "A monorepo holds related but distinct products well, but only when the shared layer is properly factored and the deployment strategy respects their differences.",
+        "Two apps can share one codebase and still ship on their own. It only works if the shared parts are built with care and each app keeps room to grow.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Client",
     nebula: {
@@ -145,7 +145,7 @@ export const projects: Project[] = [
         "Migrations and seeders are the canonical setup, scripted straight into the boot sequence.",
       ],
       learned:
-        "Developer experience is vital. Docker with Laravel Sail beats XAMPP by a wide margin for managing backend services.",
+        "How easily a team can start matters. Putting the whole setup in Docker meant a new teammate was running in one command, not one day.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Backend",
     nebula: {
@@ -182,7 +182,7 @@ export const projects: Project[] = [
         "CSRF protection on every request that changes state. No exceptions for internal routes.",
       ],
       learned:
-        "Authentication comes in many flavours. Each one trades security, usability and complexity differently, and you have to pick your poison deliberately.",
+        "There is no single right way to log people in. Every option trades off safety, ease, and effort, so I learned to choose on purpose instead of by habit.",
     },
     githubUrl: "https://flow-office.vercel.app",
     liveUrl: "https://flow-office.vercel.app",
@@ -220,7 +220,7 @@ export const projects: Project[] = [
         "A custom artisan seed command wraps SQL in transactions and blocks DELETE, TRUNCATE and DROP. Seeding is safe to run again and again.",
       ],
       learned:
-        "Boundaries are cheap to draw and expensive to add later. A modular monolith buys the option to split services someday without paying for it now.",
+        "Drawing clear lines between parts is cheap early and painful late. I split the app into clean sections up front, so growing it later stays easy.",
     },
     githubUrl: "https://github.com/Belive-FO/Belive-FO-Backend",
     nebula: {
@@ -257,7 +257,7 @@ export const projects: Project[] = [
         "Firebase Admin SDK for auth so Flutter users authenticate without a separate credential flow.",
       ],
       learned:
-        "Polyglot stacks live or die on the contract between languages. Pin the API, and the rest follows.",
+        "When a team uses two languages, the agreement between them is everything. Lock down that shared contract first and the rest falls into place.",
     },
     githubUrl: "https://github.com/Vincenthe3231/WitsNote",
     nebula: {
@@ -294,7 +294,7 @@ export const projects: Project[] = [
         "Structured error codes (200 / 400 / 404 / 502 / 500) instead of string messages.",
       ],
       learned:
-        "Error taxonomy is a real thing. A contract with structured error codes is indispensable for ML endpoints, because failure modes need names before they can be debugged.",
+        "Good error messages are worth the effort. When something breaks, clear codes tell you exactly what went wrong instead of leaving you to guess.",
     },
     githubUrl: "https://github.com/Vincenthe3231/human-api",
     liveUrl: "https://human-api-blond.vercel.app",
@@ -332,7 +332,7 @@ export const projects: Project[] = [
         "Puppeteer and Lighthouse scripts keep automated performance budgets under /artifacts.",
       ],
       learned:
-        "Performance is product. Rendering optimizations and monitoring from day one pay for themselves in engagement and retention.",
+        "Speed is part of the product, not a bonus. Caring about it from the first day is what keeps people coming back.",
     },
     githubUrl: "https://github.com/belive-ventures/vision-forge",
     nebula: {
@@ -369,7 +369,7 @@ export const projects: Project[] = [
         "A guard refuses to index a home directory or a filesystem root. One bad init should never eat a machine.",
       ],
       learned:
-        "Tooling earns trust through its failure modes. Telemetry that never breaks the CLI, locks that explain themselves, and guards against catastrophic misuse matter as much as the happy path.",
+        "You judge a tool by how it acts when things go wrong. I put as much care into safe failures and clear warnings as into the parts that just work.",
     },
     githubUrl: "https://github.com/Vincenthe3231/WitsOS",
     nebula: {
@@ -406,7 +406,7 @@ export const projects: Project[] = [
         "Asset downloads went to a Go sidecar. A goroutine pool behind a channel semaphore fetches 50 files at a time with one pooled HTTP client.",
       ],
       learned:
-        "Escalation beats configuration. A system that notices when the cheap path fails and upgrades itself handles far more of the web than any setting a user would tune by hand.",
+        "A tool that adapts beats one you have to fine tune. Mine tries the fast, cheap way first and only reaches for the heavy option when a page really needs it.",
     },
     githubUrl: "https://github.com/Vincenthe3231/crawler",
     nebula: {
@@ -443,7 +443,7 @@ export const projects: Project[] = [
         "Graceful shutdown drains the queue completely. The final events of a dying process are exactly when logs matter most.",
       ],
       learned:
-        "Backpressure is a design decision, not an accident. Deciding up front what happens when the buffer fills is what separates a logger you trust from one you rip out.",
+        "A logger should never freeze the app it is watching. I decided early what happens when it gets overwhelmed: drop a line, keep going. That choice is why you can trust it.",
     },
     githubUrl: "https://github.com/Vincenthe3231/witslog",
     nebula: {
