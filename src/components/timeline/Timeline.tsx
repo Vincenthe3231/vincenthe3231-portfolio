@@ -32,7 +32,7 @@ export const Timeline = () => {
       <SectionHeader
         eyebrow="05 / Journey"
         title="The arc of an internship."
-        description="Eight projects, multiple organisations, one continuous habit of shipping."
+        description="Eleven projects, multiple organisations, one continuous habit of shipping."
       />
 
       <div ref={containerRef} className="relative mt-20 max-w-3xl mx-auto">

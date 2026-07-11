@@ -69,7 +69,7 @@ export const Archive = () => {
       id="archive"
       className="relative"
       style={{ minHeight: reduced ? "auto" : "200vh" }}
-      aria-label="Archive — eight lessons"
+      aria-label="Archive, eleven lessons"
     >
       {/* Sticky 3D vault stage */}
       {!reduced && (
@@ -84,7 +84,7 @@ export const Archive = () => {
                 04 / Archive
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/18">
-                Eight ships · Eight lessons
+                Eleven ships · Eleven lessons
               </span>
             </div>
           </div>
@@ -124,10 +124,10 @@ export const Archive = () => {
                 04 / Archive
               </span>
               <h2 className="mt-4 font-serif text-4xl text-white/90">
-                Eight ships. Eight lessons.
+                Eleven ships. Eleven lessons.
               </h2>
               <p className="mt-3 text-sm text-white/50 max-w-md">
-                One thing each project forced me to understand — not in theory, but under deadline.
+                One thing each project forced me to understand. Not in theory, under deadline.
               </p>
             </div>
             <div className="grid gap-5 md:grid-cols-2">

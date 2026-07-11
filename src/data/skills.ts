@@ -7,10 +7,12 @@ export interface SkillNode {
 
 export const skills: SkillNode[] = [
   // Languages
-  { name: "TypeScript", group: "Language", size: 20, projects: ["human-api", "renoxpert-client", "belive-client", "vision-forge"] },
+  { name: "TypeScript", group: "Language", size: 20, projects: ["human-api", "renoxpert-client", "belive-client", "vision-forge", "witsos", "crawler"] },
   { name: "Python",     group: "Language", size: 16, projects: ["witsnote"] },
   { name: "PHP",        group: "Language", size: 12, projects: ["renoxpert-backend", "belive-backend"] },
   { name: "JavaScript", group: "Language", size: 18, projects: ["ownerui", "witsnote"] },
+  { name: "Rust",       group: "Language", size: 14, projects: ["witslog"] },
+  { name: "Go",         group: "Language", size: 12, projects: ["crawler"] },
 
   // Frontend
   { name: "React",      group: "Frontend", size: 20, projects: ["ownerui", "renoxpert-client", "belive-client", "vision-forge"] },
@@ -20,9 +22,11 @@ export const skills: SkillNode[] = [
   { name: "Inertia.js", group: "Frontend", size: 12, projects: ["ownerui"] },
 
   // Backend
-  { name: "Django",   group: "Backend", size: 16, projects: ["witsnote"] },
-  { name: "Laravel",  group: "Backend", size: 14, projects: ["ownerui", "renoxpert-backend", "belive-backend"] },
-  { name: "Docker",   group: "Backend", size: 12, projects: ["renoxpert-backend", "belive-backend"] },
+  { name: "Django",     group: "Backend", size: 16, projects: ["witsnote"] },
+  { name: "Laravel",    group: "Backend", size: 14, projects: ["ownerui", "renoxpert-backend", "belive-backend"] },
+  { name: "Docker",     group: "Backend", size: 12, projects: ["renoxpert-backend", "belive-backend"] },
+  { name: "Playwright", group: "Backend", size: 12, projects: ["crawler"] },
+  { name: "MCP",        group: "Backend", size: 12, projects: ["witsos"] },
 
   // AI/ML
   { name: "TensorFlow.js",     group: "AI/ML", size: 16, projects: ["human-api"] },
@@ -41,4 +45,5 @@ export const skills: SkillNode[] = [
   { name: "PostgreSQL", group: "Database", size: 16, projects: ["vision-forge", "human-api", "belive-backend"] },
   { name: "MySQL",      group: "Database", size: 14, projects: ["witsnote", "renoxpert-backend"] },
   { name: "RLS",        group: "Database", size: 12, projects: ["vision-forge"] },
+  { name: "SQLite",     group: "Database", size: 12, projects: ["witsos"] },
 ];

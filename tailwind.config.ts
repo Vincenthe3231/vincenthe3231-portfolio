@@ -43,6 +43,9 @@ export default {
           wits: "hsl(var(--p-wits))",
           human: "hsl(var(--p-human))",
           vision: "hsl(var(--p-vision))",
+          witsos: "hsl(var(--p-witsos))",
+          crawl: "hsl(var(--p-crawl))",
+          log: "hsl(var(--p-log))",
         },
         aurora: {
           green: "hsl(var(--aurora-green))",

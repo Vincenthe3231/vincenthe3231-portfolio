@@ -100,45 +100,6 @@ const ParticleField = () => {
   );
 };
 
-/** Atmospheric glow at horizon line */
-const HorizonGlow = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const { uniforms } = useAurora();
-
-  const shaderUniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uIntensity: { value: 0.8 },
-    }),
-    []
-  );
-
-  useFrame(() => {
-    const u = uniforms.current;
-    shaderUniforms.uTime.value = u.time;
-    const heroIntensity = 1 - u.sceneMode;
-    shaderUniforms.uIntensity.value = heroIntensity;
-
-    if (meshRef.current) {
-      const mat = meshRef.current.material as THREE.MeshBasicMaterial;
-      mat.opacity = heroIntensity * 0.2;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[0, -5.5, -7]} renderOrder={5}>
-      <planeGeometry args={[60, 4]} />
-      <meshBasicMaterial
-        color={new THREE.Color("hsl(172, 85%, 45%)")}
-        transparent
-        opacity={0.2}
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </mesh>
-  );
-};
-
 /** Camera scroll controller */
 const CameraController = () => {
   const { uniforms } = useAurora();
@@ -187,7 +148,6 @@ export function SceneBackground() {
 
           {/* Layer 2: Aurora curtains */}
           <AuroraRibbons />
-          <HorizonGlow />
 
           {/* Layer 3: Particles (preserved) */}
           <ParticleField />

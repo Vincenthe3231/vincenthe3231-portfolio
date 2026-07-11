@@ -58,7 +58,7 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-2xl text-xl md:text-2xl text-foreground/80 text-balance"
         >
-          End-to-end full-stack development.{" "}<br />
+          Full stack development, end to end.{" "}<br />
           <span className="text-accent">Production mindset.</span>{" "}
           {/* <span className="text-foreground/60">Production mindset.</span> */}
         </motion.p>

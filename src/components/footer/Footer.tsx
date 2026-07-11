@@ -77,7 +77,7 @@ export const Footer = () => {
             Vincenthe · Internship Portfolio · 2025
           </span>
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">
-            Built with React · Three.js · Babylon.js · PixiJS · Framer Motion
+            Built with React · Three.js · PixiJS · Rapier · Framer Motion
           </span>
         </div>
       </div>
