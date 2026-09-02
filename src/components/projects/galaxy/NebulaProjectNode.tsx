@@ -158,7 +158,6 @@ export function NebulaProjectNode({
     (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       setHovered(project.id);
-      document.body.style.cursor = "pointer";
     },
     [project.id, setHovered],
   );
@@ -166,7 +165,6 @@ export function NebulaProjectNode({
     (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       setHovered(null);
-      document.body.style.cursor = "";
     },
     [setHovered],
   );

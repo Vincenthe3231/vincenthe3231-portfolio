@@ -126,7 +126,6 @@ function CanvasWithGestures({
     <div
       ref={wrapperRef}
       className="absolute inset-0 touch-none select-none"
-      style={{ cursor: "grab" }}
     >
       <Canvas
         dpr={cfg.dpr}
