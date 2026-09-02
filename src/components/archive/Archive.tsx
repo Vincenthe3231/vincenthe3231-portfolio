@@ -81,7 +81,7 @@ export const Archive = () => {
           <div className="absolute top-8 left-0 right-0 z-10 px-10 pointer-events-none">
             <div className="flex items-baseline gap-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/30">
-                04 / Archive
+                03 / Archive
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/18">
                 Eleven ships · Eleven lessons
@@ -121,7 +121,7 @@ export const Archive = () => {
           <>
             <div className="mb-16">
               <span className="font-mono text-xs tracking-widest uppercase text-white/40">
-                04 / Archive
+                03 / Archive
               </span>
               <h2 className="mt-4 font-serif text-4xl text-white/90">
                 Eleven ships. Eleven lessons.

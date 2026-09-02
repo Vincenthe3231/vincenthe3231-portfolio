@@ -51,7 +51,7 @@ export const Skills = () => {
   return (
     <section id="skills" className="relative section-pad">
       <SectionHeader
-        eyebrow="03 / Stack"
+        eyebrow="02 / Stack"
         title="The toolbox, as a constellation."
         description="Hover any node to see which projects it powered."
       />

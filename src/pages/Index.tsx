@@ -51,8 +51,8 @@ const Index = () => {
             <Projects />
           </Suspense>
           <SectionTransition />
-          <About />
-          <SectionTransition />
+          {/* <About /> */}
+          {/* <SectionTransition /> */}
           <Suspense fallback={<SectionSkeleton />}>
             <Skills />
           </Suspense>
@@ -60,10 +60,10 @@ const Index = () => {
           <Suspense fallback={<SectionSkeleton />}>
             <Archive />
           </Suspense>
-          <SectionTransition />
-          <Suspense fallback={<SectionSkeleton />}>
-            <Timeline />
-          </Suspense>
+          {/* <SectionTransition /> */}
+          {/* <Suspense fallback={<SectionSkeleton />}> */}
+          {/*   <Timeline /> */}
+          {/* </Suspense> */}
           <Suspense fallback={null}>
             <Footer />
           </Suspense>

@@ -39,7 +39,7 @@ export const Footer = () => {
 
       <div className="relative">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          06 / Reach out
+          04 / Reach out
         </span>
         <h2 className="text-display text-6xl md:text-8xl lg:text-9xl mt-6 leading-[0.9] text-balance">
           Let's build<br />something <span className="text-accent">considered.</span>
