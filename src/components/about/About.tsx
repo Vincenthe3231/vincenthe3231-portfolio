@@ -43,12 +43,6 @@ const fragments: Fragment[] = [
     metric: "clean boundary",
   },
   {
-    tag: "witsnote",
-    accentVar: "--p-wits",
-    decision: "Swapped a fiddly local text reader for a cloud one. No extra installs, nothing that only works on Linux, and a shorter setup.",
-    metric: "cloud OCR",
-  },
-  {
     tag: "human-api",
     accentVar: "--p-human",
     decision: "The fast path kept crashing in the cloud, so I forced the safe one. A little slower per call, but it simply stopped failing.",
@@ -178,7 +172,7 @@ export const About = () => {
               not screens.
             </motion.h2>
             <p className="mt-8 max-w-xl text-foreground/55 text-sm md:text-base leading-relaxed">
-              Eleven projects. Renovation, internal ops, productivity, biometrics, AI tooling, code intelligence, crawling, systems. What follows are the decisions, not the screenshots.
+              Ten projects. Renovation, internal ops, biometrics, AI tooling, code intelligence, crawling, systems. What follows are the decisions, not the screenshots.
             </p>
           </div>
         </div>
@@ -226,7 +220,7 @@ export const About = () => {
       <div className="max-w-[1400px] mx-auto mt-28 md:mt-36 grid grid-cols-12 gap-x-6">
         <div className="col-span-12 md:col-span-4 md:col-start-8">
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/40 leading-relaxed">
-            Eleven decisions. Each one argued for, each one revisited at least once.
+            Ten decisions. Each one argued for, each one revisited at least once.
           </p>
         </div>
       </div>

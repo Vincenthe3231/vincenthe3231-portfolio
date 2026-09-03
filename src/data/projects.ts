@@ -71,7 +71,7 @@ export const projects: Project[] = [
         "A PWA shell, so owners install once and reopen it like a native tool.",
       ],
       learned:
-        "A pretty screen means nothing if it shows the wrong thing. I let the server stay in charge of the truth, so what you see is always what is really there.",
+        "Inertia let one Laravel brain drive a React face. The server owns the truth. The client just shows it. That one boundary kept permissions honest and killed the double logic problem for good.",
     },
     githubUrl: "https://github.com/Vincenthe3231/ownerUI/tree/finalv2",
     nebula: {
@@ -108,7 +108,7 @@ export const projects: Project[] = [
         "Independent deploys per app. Shared code, separate release cadences.",
       ],
       learned:
-        "Two apps can share one codebase and still ship on their own. It only works if the shared parts are built with care and each app keeps room to grow.",
+        "A client app and a staff portal, two Next.js apps in one Turborepo, drawing from a shared Radix and Tailwind kit. Build the shared parts with care and each app ships on its own clock. That is the whole trick.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Client",
     nebula: {
@@ -145,7 +145,7 @@ export const projects: Project[] = [
         "Migrations and seeders are the canonical setup, scripted straight into the boot sequence.",
       ],
       learned:
-        "How easily a team can start matters. Putting the whole setup in Docker meant a new teammate was running in one command, not one day.",
+        "Roles and permissions became real data, not scattered checks. Lark SSO, queues and a full audit trail all sit behind one Laravel API. The whole stack boots in Docker, so a new teammate runs in one command, not one lost day.",
     },
     githubUrl: "https://github.com/Vincenthe3231/RenoXpert-Backend",
     nebula: {
@@ -182,7 +182,7 @@ export const projects: Project[] = [
         "CSRF protection on every request that changes state. No exceptions for internal routes.",
       ],
       learned:
-        "There is no single right way to log people in. Every option trades off safety, ease, and effort, so I learned to choose on purpose instead of by habit.",
+        "The browser never talks to Laravel. Every call goes same origin to a Next.js proxy that holds the token in an httpOnly cookie. Field teams keep their Lark login and the web app stays locked down. You pick the tradeoff on purpose, never by habit.",
     },
     githubUrl: "https://flow-office.vercel.app",
     liveUrl: "https://flow-office.vercel.app",
@@ -220,7 +220,7 @@ export const projects: Project[] = [
         "A custom artisan seed command wraps SQL in transactions and blocks DELETE, TRUNCATE and DROP. Seeding is safe to run again and again.",
       ],
       learned:
-        "Drawing clear lines between parts is cheap early and painful late. I split the app into clean sections up front, so growing it later stays easy.",
+        "Attendance, leave and claims all touch the same people but move at their own pace. So I gave each its own module with hard walls between them, all on Supabase Postgres. Clear lines are cheap to draw early and brutal to add late.",
     },
     githubUrl: "https://github.com/Belive-FO/Belive-FO-Backend",
     nebula: {
@@ -231,43 +231,6 @@ export const projects: Project[] = [
       scale: 1.0,
       rotationSpeed: 0.025,
       turbulence: 0.6,
-    },
-  },
-  {
-    id: "witsnote",
-    title: "WitsNote",
-    tagline: "The Django backend behind a Flutter teammate's app. One contract, two languages.",
-    domain: "Academic · Productivity",
-    role: "Backend / FYP Author",
-    accentVar: "--p-wits",
-    accentClass: "text-project-wits",
-    glowFrom: "from-project-wits/30",
-    glowTo: "to-transparent",
-    techStack: ["Django", "DRF", "Python", "MySQL", "T5-base", "Gemini API"],
-    featureCallout:
-      "A Django REST Framework subsystem powering a teammate's Flutter note app. Four post types, Standard, Case Study, Listicle and Infographic, with nested serializers for images and subheadings. The T5 base model handles AI summarization with beam search at num_beams=4, Gemini 2.5 Flash reads images through inline base64 OCR, and the Firebase Admin SDK carries auth across platforms.",
-    story: {
-      problem:
-        "An FYP team split across Python and Dart needed one source of truth for notes. Neither side could afford to block the other, and nobody wanted to derive the API contract twice.",
-      solution:
-        "Django REST Framework owns the data, the auth and the API. The web layer renders Django templates and Flutter consumes the same endpoints. The T5 base model summarizes notes, and Gemini 2.5 Flash replaced local Tesseract for OCR.",
-      decisions: [
-        "API contract first. Both the web templates and the Flutter app build against it.",
-        "Gemini 2.5 Flash for OCR instead of local Tesseract. No binary dependency, just inline base64 image input.",
-        "Firebase Admin SDK for auth so Flutter users authenticate without a separate credential flow.",
-      ],
-      learned:
-        "When a team uses two languages, the agreement between them is everything. Lock down that shared contract first and the rest falls into place.",
-    },
-    githubUrl: "https://github.com/Vincenthe3231/WitsNote",
-    nebula: {
-      archetype: "binary",
-      colorPrimary: "#ffd28a",
-      colorSecondary: "#3a2418",
-      orbit: { radius: 15, theta: 4.5, armIndex: 0, elevation: 0.8 },
-      scale: 0.95,
-      rotationSpeed: 0.07,
-      turbulence: 0.45,
     },
   },
   {
@@ -294,7 +257,7 @@ export const projects: Project[] = [
         "Structured error codes (200 / 400 / 404 / 502 / 500) instead of string messages.",
       ],
       learned:
-        "Good error messages are worth the effort. When something breaks, clear codes tell you exactly what went wrong instead of leaving you to guess.",
+        "Face matching is one call now. Send an image, pull the stored face from Supabase, compare embeddings, get a yes or no. The whole pipeline folded into one TypeScript function on the edge. Clear status codes tell you what broke instead of leaving you to guess.",
     },
     githubUrl: "https://github.com/Vincenthe3231/human-api",
     liveUrl: "https://human-api-blond.vercel.app",
@@ -332,7 +295,7 @@ export const projects: Project[] = [
         "Puppeteer and Lighthouse scripts keep automated performance budgets under /artifacts.",
       ],
       learned:
-        "Speed is part of the product, not a bonus. Caring about it from the first day is what keeps people coming back.",
+        "A node based canvas where you wire virtual production steps together and run them. React Flow drives the graph, Supabase RLS walls off each person's space, and an Edge Function runs the pipeline. Puppeteer runs Lighthouse on every build, so performance stays a budget you can see, not a hope. Speed was never a bonus. Caring about it from day one is what keeps people coming back.",
     },
     githubUrl: "https://github.com/belive-ventures/vision-forge",
     nebula: {
@@ -369,7 +332,7 @@ export const projects: Project[] = [
         "A guard refuses to index a home directory or a filesystem root. One bad init should never eat a machine.",
       ],
       learned:
-        "You judge a tool by how it acts when things go wrong. I put as much care into safe failures and clear warnings as into the parts that just work.",
+        "Coding agents burn most of their budget just rediscovering a repo. So I indexed the whole thing once into a SQLite graph of symbols and edges, then served it over MCP. One question, one answer, source attached. You judge a tool by how it fails, so safe failures got as much care as the happy path.",
     },
     githubUrl: "https://github.com/Vincenthe3231/WitsOS",
     nebula: {
@@ -406,7 +369,7 @@ export const projects: Project[] = [
         "Asset downloads went to a Go sidecar. A goroutine pool behind a channel semaphore fetches 50 files at a time with one pooled HTTP client.",
       ],
       learned:
-        "A tool that adapts beats one you have to fine tune. Mine tries the fast, cheap way first and only reaches for the heavy option when a page really needs it.",
+        "Cheerio reads every page first because it is cheap. Only the pages that come back thin or fail get a full Playwright browser. A tool that adapts beats one you keep tuning by hand. It tries the fast way first and reaches for the heavy option only when a page really fights back.",
     },
     githubUrl: "https://github.com/Vincenthe3231/crawler",
     nebula: {
@@ -443,7 +406,7 @@ export const projects: Project[] = [
         "Graceful shutdown drains the queue completely. The final events of a dying process are exactly when logs matter most.",
       ],
       learned:
-        "A logger should never freeze the app it is watching. I decided early what happens when it gets overwhelmed: drop a line, keep going. That choice is why you can trust it.",
+        "Errors land as structured events in a local SQLite database, classified, searchable, and queryable by any AI over MCP. The logger never freezes the app it watches. When it gets swamped it drops a line and keeps going. That one decision, made early, is why you can trust it.",
     },
     githubUrl: "https://github.com/Vincenthe3231/witslog",
     nebula: {

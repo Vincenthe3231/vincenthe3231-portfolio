@@ -69,7 +69,7 @@ export const Archive = () => {
       id="archive"
       className="relative"
       style={{ minHeight: reduced ? "auto" : "200vh" }}
-      aria-label="Archive, eleven lessons"
+      aria-label="Field Notes, ten lessons"
     >
       {/* Sticky 3D vault stage */}
       {!reduced && (
@@ -81,10 +81,10 @@ export const Archive = () => {
           <div className="absolute top-8 left-0 right-0 z-10 px-10 pointer-events-none">
             <div className="flex items-baseline gap-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/30">
-                03 / Archive
+                03 / Field Notes
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/18">
-                Eleven ships · Eleven lessons
+                Ten ships · Ten lessons
               </span>
             </div>
           </div>
@@ -114,17 +114,17 @@ export const Archive = () => {
             : "sr-only"
         }
         role="region"
-        aria-label="Archive entries"
+        aria-label="Field Notes entries"
       >
         {!reduced && null}
         {reduced && (
           <>
             <div className="mb-16">
               <span className="font-mono text-xs tracking-widest uppercase text-white/40">
-                03 / Archive
+                03 / Field Notes
               </span>
               <h2 className="mt-4 font-serif text-4xl text-white/90">
-                Eleven ships. Eleven lessons.
+                Ten ships. Ten lessons.
               </h2>
               <p className="mt-3 text-sm text-white/50 max-w-md">
                 One thing each project forced me to understand. Not in theory, under deadline.

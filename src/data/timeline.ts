@@ -6,11 +6,6 @@ export interface TimelineEntry {
 
 export const timeline: TimelineEntry[] = [
   {
-    tag: "FYP",
-    title: "WitsNote shipped",
-    description: "Django web subsystem with AI summarization, paired with a Flutter mobile app sharing the same backend contract.",
-  },
-  {
     tag: "RenoXpert",
     title: "Staff RBAC, end to end",
     description: "Modelled, enforced and surfaced role based access across both the client and server repos.",
